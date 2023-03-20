@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.arjunc196.DatabaseHelper;
@@ -25,6 +27,8 @@ public class TermsList extends AppCompatActivity {
 
         dbHelper = new DatabaseHelper(this);
         termListView = findViewById(R.id.termListView);
+
+        // go to add terms
         FloatingActionButton addTermButton = findViewById(R.id.addTermButton);
         addTermButton.setOnClickListener(view -> {
             Intent intent = new Intent(TermsList.this, AddTerms.class);
@@ -33,12 +37,21 @@ public class TermsList extends AppCompatActivity {
 
         adapter = new TermAdapter(this, null);
         termListView.setAdapter(adapter);
+
+        // go to term details
+        termListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(TermsList.this, TermDetails.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        // Fetch data from database and bind it to the list view
+        // fetch data from database and bind it to the list view
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String[] projection = {
                 "id AS _id",
@@ -53,7 +66,7 @@ public class TermsList extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        // Close the cursor to release resources
+        // close the cursor to release resources
         adapter.swapCursor(null);
     }
 }

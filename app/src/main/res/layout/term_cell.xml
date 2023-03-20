@@ -11,21 +11,21 @@
         android:layout_height="wrap_content"
         android:text="Term Title"
         android:textStyle="bold"
-        android:textSize="30dp">
+        android:textSize="30sp">
     </TextView>
     <TextView
         android:id="@+id/startText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start Date"
-        android:textSize="30dp">
+        android:textSize="30sp">
     </TextView>
     <TextView
         android:id="@+id/endText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="End Date"
-        android:textSize="30dp">
+        android:textSize="30sp">
     </TextView>
 
 
