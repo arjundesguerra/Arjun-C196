@@ -43,8 +43,8 @@ public class TermsList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(TermsList.this, TermDetails.class);
+                intent.putExtra("term_id", id);
                 startActivity(intent);
-
             }
         });
     }
@@ -62,6 +62,7 @@ public class TermsList extends AppCompatActivity {
         };
         Cursor cursor = db.query("terms", projection, null, null, null, null, null);
         adapter.swapCursor(cursor);
+
     }
 
     @Override
