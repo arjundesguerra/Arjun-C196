@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.arjunc196.termsActivities.Terms;
-import com.example.arjunc196.termsActivities.addTerms;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.arjunc196.termsActivities.TermsList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         goToTerms.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Terms.class);
+                Intent intent = new Intent(MainActivity.this, TermsList.class);
                 startActivity(intent);
             }
         });

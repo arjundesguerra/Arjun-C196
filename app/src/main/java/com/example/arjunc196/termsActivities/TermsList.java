@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.example.arjunc196.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class Terms extends AppCompatActivity {
+public class TermsList extends AppCompatActivity {
 
 
     @Override
@@ -17,7 +17,7 @@ public class Terms extends AppCompatActivity {
 
         FloatingActionButton addTermButton = findViewById(R.id.addTermButton);
         addTermButton.setOnClickListener(view -> {
-            Intent intent = new Intent(Terms.this, addTerms.class);
+            Intent intent = new Intent(TermsList.this, AddTerms.class);
             startActivity(intent);
         });
 
