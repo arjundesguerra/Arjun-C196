@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.arjunc196.coursesActivities.CoursesList;
 import com.example.arjunc196.termsActivities.TermsList;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +22,16 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, TermsList.class);
+                startActivity(intent);
+            }
+        });
+
+        Button goToMentors = findViewById(R.id.goToMentors);
+        goToMentors.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CoursesList.class);
                 startActivity(intent);
             }
         });

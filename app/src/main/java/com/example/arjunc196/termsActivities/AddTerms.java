@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -47,6 +49,10 @@ public class AddTerms extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog(startCalendar, startDateButton);
+
+                //hides keyboard
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
         });
 
@@ -54,6 +60,20 @@ public class AddTerms extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog(endCalendar, endDateButton);
+
+                //hides keyboard
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
+        });
+
+        termTitleEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // clear the text when the EditText gains focus
+                    ((EditText) v).setText("");
+                }
             }
         });
 

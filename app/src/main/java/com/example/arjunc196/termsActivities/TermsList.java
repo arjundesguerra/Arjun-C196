@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.arjunc196.DatabaseHelper;
+import com.example.arjunc196.MainActivity;
 import com.example.arjunc196.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -23,7 +24,7 @@ public class TermsList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_terms);
+        setContentView(R.layout.activity_terms_list);
 
         dbHelper = new DatabaseHelper(this);
         termListView = findViewById(R.id.termListView);
@@ -70,5 +71,12 @@ public class TermsList extends AppCompatActivity {
         super.onStop();
         // close the cursor to release resources
         adapter.swapCursor(null);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
