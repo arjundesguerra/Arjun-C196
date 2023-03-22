@@ -79,12 +79,12 @@ public class AddTerms extends AppCompatActivity {
 
 
         submitButton.setOnClickListener(view -> {
-            // Get the entered data
+            // get the entered data
             String termTitle = termTitleEditText.getText().toString();
             String startDate = dateFormat.format(startCalendar.getTime());
             String endDate = dateFormat.format(endCalendar.getTime());
 
-            // Insert the data into the database
+            // insert the data into the database
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put("termTitle", termTitle);
