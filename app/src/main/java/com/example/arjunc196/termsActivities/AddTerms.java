@@ -45,35 +45,26 @@ public class AddTerms extends AppCompatActivity {
         endDateButton = findViewById(R.id.endDateButton);
         submitButton = findViewById(R.id.submitButton);
 
-        startDateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePickerDialog(startCalendar, startDateButton);
+        startDateButton.setOnClickListener(v -> {
+            showDatePickerDialog(startCalendar, startDateButton);
 
-                //hides keyboard
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-            }
+            //hides keyboard
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
         });
 
-        endDateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePickerDialog(endCalendar, endDateButton);
+        endDateButton.setOnClickListener(v -> {
+            showDatePickerDialog(endCalendar, endDateButton);
 
-                //hides keyboard
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-            }
+            //hides keyboard
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
         });
 
-        termTitleEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    // clear the text when the EditText gains focus
-                    ((EditText) v).setText("");
-                }
+        termTitleEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                // clear the text when the EditText gains focus
+                ((EditText) v).setText("");
             }
         });
 
@@ -92,7 +83,7 @@ public class AddTerms extends AppCompatActivity {
             values.put("endDate", endDate);
             db.insert("terms", null, values);
 
-            // Open the terms list activity
+            // open the terms list activity
             Intent intent = new Intent(AddTerms.this, TermsList.class);
             startActivity(intent);
         });
