@@ -91,6 +91,11 @@ public class AddCourses extends AppCompatActivity {
             if (hasFocus) {
                 // clear the text when the EditText gains focus
                 ((EditText) v).setText("");
+            } else {
+                // if the EditText loses focus, check if the text is empty and set it back to the original value
+                if (((EditText) v).getText().toString().isEmpty()) {
+                    ((EditText) v).setText("Enter a course title");
+                }
             }
         });
 
