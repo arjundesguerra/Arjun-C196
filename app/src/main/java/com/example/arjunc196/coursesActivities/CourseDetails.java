@@ -68,7 +68,7 @@ public class CourseDetails extends AppCompatActivity {
                 String selection = "id = ?";
                 String[] selectionArgs = { String.valueOf(termId) };
                 db.delete("courses", selection, selectionArgs);
-                Toast.makeText(CourseDetails.this, "Term deleted successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CourseDetails.this, "Course deleted successfully", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
