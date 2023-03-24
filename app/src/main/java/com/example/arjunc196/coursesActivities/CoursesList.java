@@ -26,15 +26,15 @@ public class CoursesList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses_list);
 
-        dbHelper = new DatabaseHelper(this);
-        courseListView = findViewById(R.id.coursesListView);
-
         // go to add courses
         FloatingActionButton addCourseButton = findViewById(R.id.addCourseButton);
         addCourseButton.setOnClickListener(view -> {
             Intent intent = new Intent(CoursesList.this, AddCourses.class);
             startActivity(intent);
         });
+
+        dbHelper = new DatabaseHelper(this);
+        courseListView = findViewById(R.id.coursesListView);
 
         adapter = new CourseAdapter(this, null);
         courseListView.setAdapter(adapter);
