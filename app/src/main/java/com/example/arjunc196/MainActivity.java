@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.arjunc196.coursesActivities.CoursesList;
+import com.example.arjunc196.instructorActivities.InstructorList;
 import com.example.arjunc196.termsActivities.TermsList;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,22 +19,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button goToTerms = findViewById(R.id.goToTerms);
-        goToTerms.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, TermsList.class);
-                startActivity(intent);
-            }
+        goToTerms.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, TermsList.class);
+            startActivity(intent);
         });
 
-        Button goToMentors = findViewById(R.id.goToMentors);
-        goToMentors.setOnClickListener(new View.OnClickListener() {
+        Button goToInstructors = findViewById(R.id.goToInstructors);
+        goToInstructors.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, InstructorList.class);
+            startActivity(intent);
+        });
 
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CoursesList.class);
-                startActivity(intent);
-            }
+        Button goToMentors = findViewById(R.id.goToCourses);
+        goToMentors.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, CoursesList.class);
+            startActivity(intent);
         });
     }
 }
