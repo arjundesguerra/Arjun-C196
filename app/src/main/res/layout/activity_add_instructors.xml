@@ -43,7 +43,7 @@
         android:layout_marginTop="164dp"
         android:ems="10"
         android:gravity="center"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         android:text="Enter instructor email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addInstructorText" />
@@ -56,7 +56,7 @@
         android:layout_marginTop="256dp"
         android:ems="10"
         android:gravity="center"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:text="Enter instructor phone number"
         android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
