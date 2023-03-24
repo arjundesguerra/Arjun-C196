@@ -37,17 +37,20 @@ public class CourseAdapter extends CursorAdapter {
         TextView endDateTextView = view.findViewById(R.id.endText);
         TextView termTitleView = view.findViewById(R.id.termText);
         TextView statusTextView = view.findViewById(R.id.statusText);
+        TextView instructorTextView = view.findViewById(R.id.instructorText);
 
 
         String courseTitle = cursor.getString(cursor.getColumnIndexOrThrow("courseTitle"));
         String startDateString = cursor.getString(cursor.getColumnIndexOrThrow("courseStartDate"));
         String endDateString = cursor.getString(cursor.getColumnIndexOrThrow("courseEndDate"));
         String termTitle = cursor.getString(cursor.getColumnIndexOrThrow("termTitle"));
+        String instructorText = cursor.getString(cursor.getColumnIndexOrThrow("instructorName"));
         String statusText = cursor.getString(cursor.getColumnIndexOrThrow("status"));
 
         courseTitleTextView.setText(courseTitle);
         termTitleView.setText(termTitle);
         statusTextView.setText(statusText);
+        instructorTextView.setText(instructorText);
 
 
         try {

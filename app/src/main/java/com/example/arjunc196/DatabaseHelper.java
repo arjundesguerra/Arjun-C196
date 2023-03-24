@@ -39,6 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_COURSE_START_DATE + " TEXT,"
             + KEY_COURSE_END_DATE + " TEXT,"
             + KEY_TERM_TITLE + " TEXT,"
+            + KEY_INSTRUCTOR_NAME + " TEXT, "
             + KEY_STATUS + " TEXT, "
             + "FOREIGN KEY(" + KEY_TERM_TITLE + ") REFERENCES " + TABLE_TERMS + "(" + KEY_TERM_TITLE + ")"
             + ")";

@@ -34,11 +34,21 @@
         app:layout_constraintTop_toBottomOf="@+id/addCourseText" />
 
     <Button
+        android:id="@+id/instructorButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="72dp"
+        android:text="Select Instructor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editCourseTitle" />
+
+    <Button
         android:id="@+id/termButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:text="Select Term"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editCourseTitle" />
@@ -48,7 +58,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="120dp"
         android:text="Select Status"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editCourseTitle" />
@@ -58,7 +68,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:text="Select End Date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startDateButton" />
@@ -68,17 +78,16 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="64dp"
         android:text="Select Start Date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/termButton" />
+        app:layout_constraintTop_toBottomOf="@+id/statusButton" />
 
     <Button
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="156dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:text="Submit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/endDateButton" />

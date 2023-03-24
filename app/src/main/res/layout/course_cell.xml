@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="140dp"
     android:padding="15dp"
     >
 
@@ -11,9 +11,8 @@
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
         android:text="Course Title"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="Course Term"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,12 +31,24 @@
     <TextView
         android:id="@+id/statusText"
         android:layout_width="174dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="42dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
         android:layout_marginEnd="8dp"
         android:gravity="end"
         android:text="Status"
-        android:textSize="30sp"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/instructorText"
+        android:layout_width="174dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="66dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="end"
+        android:text="Instructor"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,9 +56,8 @@
         android:id="@+id/startText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
         android:text="Start Date"
-        android:textSize="30sp"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleText" />
 
@@ -55,8 +65,9 @@
         android:id="@+id/endText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="-1dp"
         android:text="End Date"
-        android:textSize="30sp"
+        android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startText" />
 

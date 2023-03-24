@@ -26,6 +26,7 @@ public class AddCourses extends AppCompatActivity {
 
     private EditText editCourseTitle;
     private Button termButton;
+    private Button instructorButton;
     private Button statusButton;
     private Button startDateButton;
     private Button endDateButton;
@@ -47,6 +48,7 @@ public class AddCourses extends AppCompatActivity {
 
         editCourseTitle = findViewById(R.id.editCourseTitle);
         termButton = findViewById(R.id.termButton);
+        instructorButton = findViewById(R.id.instructorButton);
         statusButton = findViewById(R.id.statusButton);
         startDateButton = findViewById(R.id.startDateButton);
         endDateButton = findViewById(R.id.endDateButton);
@@ -54,7 +56,14 @@ public class AddCourses extends AppCompatActivity {
 
 
         termButton.setOnClickListener(view -> {
-            showPopupMenu(view);
+            termPopupMenu(view);
+            //hides keyboard
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        });
+
+        instructorButton.setOnClickListener(view -> {
+            instructorPopupMenu(view);
             //hides keyboard
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
@@ -124,6 +133,7 @@ public class AddCourses extends AppCompatActivity {
             String courseTitle = editCourseTitle.getText().toString();
             String courseStartDate = startDateButton.getText().toString();
             String courseEndDate = endDateButton.getText().toString();
+            String instructorName = instructorButton.getText().toString();
 
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             // insert the course information into the database row for the selected term title
@@ -132,24 +142,19 @@ public class AddCourses extends AppCompatActivity {
             contentValues.put("courseStartDate", courseStartDate);
             contentValues.put("courseEndDate", courseEndDate);
             contentValues.put("termTitle", selectedTermTitle);
+            contentValues.put("instructorName", instructorName);
             contentValues.put("status", status);
             db.insert("courses", null, contentValues);
-
-
 
             // open the course list activity
             Intent intent = new Intent(AddCourses.this, CoursesList.class);
             startActivity(intent);
         });
 
-
-
-
-
     }
 
 
-    private void showPopupMenu(View view) {
+    private void termPopupMenu(View view) {
         // query the database for all term titles
         Cursor cursor = db.query("terms", new String[]{"termTitle"}, null, null, null, null, null);
 
@@ -172,6 +177,31 @@ public class AddCourses extends AppCompatActivity {
         popupMenu.show();
 
     }
+
+    private void instructorPopupMenu(View view) {
+        // query the database for all instructor names
+        Cursor cursor = db.query("instructors", new String[]{"instructorName"}, null, null, null, null, null);
+
+        // create a popup menu and add menu items for each instructor name
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        while (cursor.moveToNext()) {
+            @SuppressLint("Range") String instructorName = cursor.getString(cursor.getColumnIndex("instructorName"));
+            popupMenu.getMenu().add(instructorName);
+        }
+
+        // set a click listener on the menu items to handle the selection
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                instructorButton.setText(menuItem.getTitle());
+                return true;
+            }
+        });
+
+        popupMenu.show();
+
+    }
+
 
     private void showDatePickerDialog(final Calendar calendar, final Button button) {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
