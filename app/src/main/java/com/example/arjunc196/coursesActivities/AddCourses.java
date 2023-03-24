@@ -26,6 +26,7 @@ public class AddCourses extends AppCompatActivity {
 
     private EditText editCourseTitle;
     private Button termButton;
+    private Button statusButton;
     private Button startDateButton;
     private Button endDateButton;
     private Button submitButton;
@@ -46,6 +47,7 @@ public class AddCourses extends AppCompatActivity {
 
         editCourseTitle = findViewById(R.id.editCourseTitle);
         termButton = findViewById(R.id.termButton);
+        statusButton = findViewById(R.id.statusButton);
         startDateButton = findViewById(R.id.startDateButton);
         endDateButton = findViewById(R.id.endDateButton);
         submitButton = findViewById(R.id.submitButton);
@@ -57,6 +59,33 @@ public class AddCourses extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         });
+
+        statusButton.setOnClickListener(view -> {
+            // create a popup menu with the four status options
+            PopupMenu popupMenu = new PopupMenu(this, view);
+            popupMenu.getMenu().add("In Progress");
+            popupMenu.getMenu().add("Completed");
+            popupMenu.getMenu().add("Dropped");
+            popupMenu.getMenu().add("Plan To Take");
+
+            // set a click listener on the menu items to handle the selection
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    // set the text of the status button to the selected option
+                    statusButton.setText(menuItem.getTitle());
+                    return true;
+                }
+            });
+
+            // show the popup menu
+            popupMenu.show();
+
+            // hide the soft keyboard
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        });
+
 
         editCourseTitle.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
@@ -84,6 +113,7 @@ public class AddCourses extends AppCompatActivity {
         submitButton.setOnClickListener(view -> {
             // get the selected term title
             String selectedTermTitle = termButton.getText().toString();
+            String status = statusButton.getText().toString();
 
             // get the course title, start date, and end date
             String courseTitle = editCourseTitle.getText().toString();
@@ -97,6 +127,7 @@ public class AddCourses extends AppCompatActivity {
             contentValues.put("courseStartDate", courseStartDate);
             contentValues.put("courseEndDate", courseEndDate);
             contentValues.put("termTitle", selectedTermTitle);
+            contentValues.put("status", status);
             db.insert("courses", null, contentValues);
 
 
@@ -105,6 +136,8 @@ public class AddCourses extends AppCompatActivity {
             Intent intent = new Intent(AddCourses.this, CoursesList.class);
             startActivity(intent);
         });
+
+
 
 
 

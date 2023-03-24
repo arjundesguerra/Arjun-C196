@@ -60,7 +60,8 @@ public class CoursesList extends AppCompatActivity {
                 "courseTitle",
                 "courseStartDate",
                 "courseEndDate",
-                "termTitle"
+                "termTitle",
+                "status"
         };
         Cursor cursor = db.query("courses", projection, null, null, null, null, null);
         adapter.swapCursor(cursor);

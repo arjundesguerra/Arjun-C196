@@ -23,7 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + KEY_TERM_TITLE + " TEXT,"
             + KEY_START_DATE + " TEXT,"
-            + KEY_END_DATE + " TEXT"
+            + KEY_END_DATE + " TEXT "
             + ")";
 
     private static final String CREATE_TABLE_COURSES = "CREATE TABLE " + TABLE_COURSES + "("
@@ -32,6 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_COURSE_START_DATE + " TEXT,"
             + KEY_COURSE_END_DATE + " TEXT,"
             + KEY_TERM_TITLE + " TEXT,"
+            + KEY_STATUS + " TEXT, "
             + "FOREIGN KEY(" + KEY_TERM_TITLE + ") REFERENCES " + TABLE_TERMS + "(" + KEY_TERM_TITLE + ")"
             + ")";
 
