@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
+    android:layout_height="135dp"
     android:padding="15dp"
     >
 
@@ -21,7 +21,6 @@
         android:id="@+id/termText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:text="Course Term"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -33,7 +32,6 @@
         android:layout_width="174dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="33dp"
-        android:layout_marginEnd="8dp"
         android:gravity="end"
         android:text="Status"
         android:textSize="25sp"
@@ -43,14 +41,12 @@
     <TextView
         android:id="@+id/instructorText"
         android:layout_width="174dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="66dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="end"
+        android:layout_height="33dp"
         android:text="Instructor"
+        android:gravity="end"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/statusText" />
 
     <TextView
         android:id="@+id/startText"

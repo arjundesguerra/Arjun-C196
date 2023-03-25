@@ -60,30 +60,27 @@ public class TermDetails extends AppCompatActivity {
         }
         cursor.close();
 
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // check if there are any courses with this term
-                SQLiteDatabase db = dbHelper.getReadableDatabase();
-                String[] projection = { "id AS _id" };
-                String selection = "termTitle = ?";
-                String[] selectionArgs = { termTitleTextView.getText().toString() };
-                Cursor cursor = db.query("courses", projection, selection, selectionArgs, null, null, null);
+        deleteButton.setOnClickListener(v -> {
+            // check if there are any courses with this term
+            SQLiteDatabase db1 = dbHelper.getReadableDatabase();
+            String[] projection1 = { "id AS _id" };
+            String selection1 = "termTitle = ?";
+            String[] selectionArgs1 = { termTitleTextView.getText().toString() };
+            Cursor cursor1 = db1.query("courses", projection1, selection1, selectionArgs1, null, null, null);
 
-                if (cursor.getCount() > 0) {
-                    // if there are courses with this term, show a toast message
-                    Toast.makeText(TermDetails.this, "Cannot delete this term as it has courses associated with it", Toast.LENGTH_SHORT).show();
-                } else {
-                    // delete the term from the database
-                    SQLiteDatabase db2 = dbHelper.getWritableDatabase();
-                    String selection2 = "id = ?";
-                    String[] selectionArgs2 = { String.valueOf(termId) };
-                    db2.delete("terms", selection2, selectionArgs2);
-                    Toast.makeText(TermDetails.this, "Term deleted successfully", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-                cursor.close();
+            if (cursor1.getCount() > 0) {
+                // if there are courses with this term, show a toast message
+                Toast.makeText(TermDetails.this, "Cannot delete this term as it has courses associated with it", Toast.LENGTH_SHORT).show();
+            } else {
+                // delete the term from the database
+                SQLiteDatabase db2 = dbHelper.getWritableDatabase();
+                String selection2 = "id = ?";
+                String[] selectionArgs2 = { String.valueOf(termId) };
+                db2.delete("terms", selection2, selectionArgs2);
+                Toast.makeText(TermDetails.this, "Term deleted successfully", Toast.LENGTH_SHORT).show();
+                finish();
             }
+            cursor1.close();
         });
 
 
