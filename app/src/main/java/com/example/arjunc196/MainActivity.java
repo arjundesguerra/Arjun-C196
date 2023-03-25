@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
+import com.example.arjunc196.assessmentActivities.AssessmentsList;
 import com.example.arjunc196.coursesActivities.CoursesList;
 import com.example.arjunc196.instructorActivities.InstructorList;
 import com.example.arjunc196.termsActivities.TermsList;
@@ -35,5 +35,12 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, CoursesList.class);
             startActivity(intent);
         });
+
+        Button goToAssessments = findViewById(R.id.goToAssessments);
+        goToAssessments.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, AssessmentsList.class);
+            startActivity(intent);
+        });
+
     }
 }
