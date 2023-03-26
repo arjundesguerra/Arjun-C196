@@ -40,7 +40,7 @@ public class AssessmentDetails extends AppCompatActivity {
         Intent intent = getIntent();
         long assessmentId = intent.getLongExtra("assessment_id", -1);
 
-        // fetch the term from the database using the term ID
+        // fetch the assessment from the database using the assessment ID
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String[] projection = {
                 "id AS _id",
@@ -54,7 +54,7 @@ public class AssessmentDetails extends AppCompatActivity {
         String[] selectionArgs = { String.valueOf(assessmentId) };
         Cursor cursor = db.query("assessments", projection, selection, selectionArgs, null, null, null);
         if (cursor.moveToFirst()) {
-            // display the term details in the UI
+            // display the asssessment details in the UI
             String assessmentName = cursor.getString(cursor.getColumnIndexOrThrow("assessmentTitle"));
             String courseTitle = cursor.getString(cursor.getColumnIndexOrThrow("courseTitle"));
             String asssesmentType = cursor.getString(cursor.getColumnIndexOrThrow("assessmentType"));
@@ -70,7 +70,7 @@ public class AssessmentDetails extends AppCompatActivity {
         cursor.close();
 
         deleteButton.setOnClickListener(v -> {
-            // delete the term from the database
+            // delete the assessment from the database
             SQLiteDatabase db1 = dbHelper.getWritableDatabase();
             String selection1 = "id = ?";
             String[] selectionArgs1 = { String.valueOf(assessmentId) };

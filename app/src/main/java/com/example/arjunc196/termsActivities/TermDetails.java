@@ -8,19 +8,27 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.arjunc196.DatabaseHelper;
 import com.example.arjunc196.R;
+import com.example.arjunc196.coursesActivities.CourseAdapter;
+import com.example.arjunc196.coursesActivities.CourseDetails;
 
 public class TermDetails extends AppCompatActivity {
 
-    private DatabaseHelper dbHelper;
     private TextView termTitleTextView;
     private TextView startDateTextView;
     private TextView endDateTextView;
     private Button deleteButton;
+
+    private ListView courseListView;
+    private DatabaseHelper dbHelper;
+    private CourseAdapter adapter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +91,44 @@ public class TermDetails extends AppCompatActivity {
             cursor1.close();
         });
 
+        dbHelper = new DatabaseHelper(this);
+        courseListView = findViewById(R.id.coursesListView);
 
+        adapter = new CourseAdapter(this, null);
+        courseListView.setAdapter(adapter);
+
+        // go to course details
+        courseListView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent1 = new Intent(TermDetails.this, CourseDetails.class);
+            intent1.putExtra("course_id", id);
+            startActivity(intent1);
+        });
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // fetch data from database and bind it to the list view
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] projection = {
+                "id AS _id",
+                "courseTitle",
+                "courseStartDate",
+                "courseEndDate",
+                "termTitle",
+                "instructorName",
+                "status"
+        };
+        Cursor cursor = db.query("courses", projection, null, null, null, null, null);
+        adapter.swapCursor(cursor);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // close the cursor to release resources
+        adapter.swapCursor(null);
     }
 
     @Override
