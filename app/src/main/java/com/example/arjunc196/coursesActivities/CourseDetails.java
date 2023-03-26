@@ -6,14 +6,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.arjunc196.DatabaseHelper;
 import com.example.arjunc196.R;
-import com.example.arjunc196.termsActivities.TermDetails;
+import com.example.arjunc196.instructorActivities.InstructorAdapter;
 
 public class CourseDetails extends AppCompatActivity {
 
@@ -22,6 +22,10 @@ public class CourseDetails extends AppCompatActivity {
     private TextView startDateDetails;
     private TextView endDateDetails;
     private Button deleteButton;
+
+    private ListView instructorListView;
+    private InstructorAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +38,11 @@ public class CourseDetails extends AppCompatActivity {
         endDateDetails = findViewById(R.id.endDateDetails);
         deleteButton = findViewById(R.id.deleteButton);
 
-        // get the term ID passed through the intent
+        // get the course ID passed through the intent
         Intent intent = getIntent();
         long courseId = intent.getLongExtra("course_id", -1);
 
-        // fetch the term from the database using the term ID
+        // fetch the course from the database using the course ID
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String[] projection = {
                 "id AS _id",
@@ -50,7 +54,7 @@ public class CourseDetails extends AppCompatActivity {
         String[] selectionArgs = { String.valueOf(courseId) };
         Cursor cursor = db.query("courses", projection, selection, selectionArgs, null, null, null);
         if (cursor.moveToFirst()) {
-            // display the term details in the UI
+            // display the course details in the UI
             String courseTitle = cursor.getString(cursor.getColumnIndexOrThrow("courseTitle"));
             String courseStartDate = cursor.getString(cursor.getColumnIndexOrThrow("courseStartDate"));
             String courseEndDate = cursor.getString(cursor.getColumnIndexOrThrow("courseEndDate"));
@@ -59,6 +63,7 @@ public class CourseDetails extends AppCompatActivity {
             startDateDetails.setText(courseStartDate);
             endDateDetails.setText(courseEndDate);
         }
+
         cursor.close();
 
         deleteButton.setOnClickListener(v -> {
@@ -84,6 +89,35 @@ public class CourseDetails extends AppCompatActivity {
             cursor1.close();
         });
 
+        dbHelper = new DatabaseHelper(this);
+        instructorListView = findViewById(R.id.instructorListView);
+
+        adapter = new InstructorAdapter(this, null);
+        instructorListView.setAdapter(adapter);
+
+    }
+
+    //instructor list view methods
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // fetch data from database and bind it to the list view
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] projection = {
+                "id AS _id",
+                "instructorName",
+                "instructorEmail",
+                "instructorNumber"
+        };
+        Cursor cursor = db.query("instructors", projection, null, null, null, null, null);
+        adapter.swapCursor(cursor);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // close the cursor to release resources
+        adapter.swapCursor(null);
     }
 
     @Override

@@ -11,7 +11,7 @@
         android:id="@+id/assessmentDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="66dp"
         android:layout_marginTop="40dp"
         android:text="Assessment Details"
         android:textSize="30sp"
