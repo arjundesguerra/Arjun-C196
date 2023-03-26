@@ -20,13 +20,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/instructorNameDetails"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_width="278dp"
+        android:layout_height="27dp"
         android:layout_marginStart="96dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="97dp"
+        android:autoSizeMaxTextSize="20sp"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeTextType="uniform"
         android:gravity="center"
         android:text="Instructor Name"
         android:textSize="20sp"
@@ -36,34 +40,42 @@
 
     <TextView
         android:id="@+id/emailDetails"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="144dp"
+        android:layout_width="280dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="16dp"
+        android:autoSizeMaxTextSize="20sp"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeTextType="uniform"
         android:gravity="center"
         android:text="Email"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/instructorNameDetails" />
 
     <TextView
         android:id="@+id/numberDetails"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="4dp"
+        android:layout_width="282dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="58dp"
+        android:autoSizeMaxTextSize="20sp"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeTextType="uniform"
         android:gravity="center"
         android:text="Phone Number"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsText" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailDetails" />
 
     <ListView
         android:id="@+id/coursesWithInstructorListView"
         android:layout_width="314dp"
         android:layout_height="356dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/numberDetails" />
 
@@ -71,8 +83,8 @@
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="16dp"
         android:text="Delete Term"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/coursesWithInstructorListView" />

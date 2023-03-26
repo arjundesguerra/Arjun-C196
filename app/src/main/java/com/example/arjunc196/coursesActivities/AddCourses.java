@@ -78,13 +78,10 @@ public class AddCourses extends AppCompatActivity {
             popupMenu.getMenu().add("Plan To Take");
 
             // set a click listener on the menu items to handle the selection
-            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem menuItem) {
-                    // set the text of the status button to the selected option
-                    statusButton.setText(menuItem.getTitle());
-                    return true;
-                }
+            popupMenu.setOnMenuItemClickListener(menuItem -> {
+                // set the text of the status button to the selected option
+                statusButton.setText(menuItem.getTitle());
+                return true;
             });
 
             // show the popup menu

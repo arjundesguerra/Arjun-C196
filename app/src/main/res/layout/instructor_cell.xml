@@ -2,30 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="135dp"
     android:padding="15dp"
     >
+
     <TextView
         android:id="@+id/nameText"
-        android:layout_width="wrap_content"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:text="Instructor Name"
-        android:textSize="30sp">
-    </TextView>
+        android:textSize="25sp"></TextView>
+
     <TextView
         android:id="@+id/emailText"
-        android:layout_width="wrap_content"
+        android:layout_width="359dp"
         android:layout_height="wrap_content"
         android:text="Instructor Email"
-        android:textSize="30sp">
-    </TextView>
+        android:textSize="25sp"></TextView>
+
     <TextView
         android:id="@+id/numberText"
-        android:layout_width="wrap_content"
+        android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:text="Instructor Number"
-        android:textSize="30sp">
-    </TextView>
+        android:textSize="25sp"></TextView>
 
 
 </LinearLayout>

@@ -8,7 +8,7 @@
     tools:context=".termsActivities.AddTerms">
 
     <TextView
-        android:id="@+id/addCourseText"
+        android:id="@+id/addAssessmentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editCourseTitle"
+        android:id="@+id/editAssessmentTitle"
         android:layout_width="300dp"
         android:layout_height="58dp"
         android:layout_marginStart="44dp"
@@ -31,34 +31,33 @@
         android:inputType="textPersonName"
         android:text="Enter an assessment title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addCourseText" />
+        app:layout_constraintTop_toBottomOf="@+id/addAssessmentText" />
+
 
     <Button
-        android:id="@+id/termButton"
+        android:id="@+id/courseButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="96dp"
         android:layout_marginTop="24dp"
-        android:text="Select Term"
+        android:text="Select Course"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editCourseTitle" />
-
+        app:layout_constraintTop_toBottomOf="@+id/editAssessmentTitle" />
 
     <Button
-        android:id="@+id/typeButton"
+        android:id="@+id/startDateButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="72dp"
-        android:text="Select Type"
+        android:layout_marginStart="96dp"
+        android:text="Select Start Date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editCourseTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/typeButton" />
 
     <Button
         android:id="@+id/endDateButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="96dp"
         android:layout_marginTop="4dp"
         android:text="Select End Date"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,20 +67,21 @@
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
+        android:layout_marginStart="152dp"
         android:layout_marginTop="4dp"
         android:text="Submit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/endDateButton" />
 
     <Button
-        android:id="@+id/startDateButton"
+        android:id="@+id/typeButton"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:text="Select Start Date"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="72dp"
+        android:text="Select Type"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/typeButton" />
+        app:layout_constraintTop_toBottomOf="@+id/editAssessmentTitle" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

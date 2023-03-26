@@ -10,6 +10,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_TERMS = "terms";
     private static final String TABLE_COURSES = "courses";
     private static final String TABLE_INSTRUCTORS = "instructors";
+    private static final String TABLE_ASSESSMENTS = "assessments";
+
 
     private static final String KEY_ID = "id";
     private static final String KEY_TERM_TITLE = "termTitle";
@@ -24,6 +26,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_INSTRUCTOR_NAME = "instructorName";
     private static final String KEY_INSTRUCTOR_EMAIL = "instructorEmail";
     private static final String KEY_INSTRUCTOR_NUMBER = "instructorNumber";
+
+    private static final String KEY_ASSESSMENT_ID = "assessment_id";
+    private static final String KEY_ASSESSMENT_TITLE = "assessmentTitle";
+    private static final String KEY_ASSESSMENT_TYPE = "assessmentType";
+    private static final String KEY_ASSESSMENT_START_DATE = "startDate";
+    private static final String KEY_ASSESSMENT_END_DATE = "endDate";
 
 
     private static final String CREATE_TABLE_TERMS = "CREATE TABLE " + TABLE_TERMS + "("
@@ -51,6 +59,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_INSTRUCTOR_NUMBER + " TEXT "
             + ")";
 
+    private static final String CREATE_TABLE_ASSESSMENTS = "CREATE TABLE " + TABLE_ASSESSMENTS + "("
+            + KEY_ASSESSMENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + KEY_ASSESSMENT_TITLE + " TEXT, "
+            + KEY_ASSESSMENT_TYPE + " TEXT,"
+            + KEY_ASSESSMENT_START_DATE + " TEXT,"
+            + KEY_ASSESSMENT_END_DATE + " TEXT,"
+            + KEY_COURSE_TITLE + " TEXT,"
+            + "FOREIGN KEY(" + KEY_COURSE_TITLE + ") REFERENCES " + TABLE_COURSES + "(" + KEY_COURSE_TITLE + ")"
+            + ")";
+
+
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -61,6 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_TERMS);
         db.execSQL(CREATE_TABLE_COURSES);
         db.execSQL(CREATE_TABLE_INSTRUCTORS);
+        db.execSQL(CREATE_TABLE_ASSESSMENTS);
     }
 
     @Override
@@ -68,6 +88,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TERMS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_COURSES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_INSTRUCTORS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ASSESSMENTS);
+
         onCreate(db);
     }
 }
