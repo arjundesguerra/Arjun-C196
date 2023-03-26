@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.arjunc196.DatabaseHelper;
 import com.example.arjunc196.R;
 import com.example.arjunc196.instructorActivities.InstructorAdapter;
+import com.example.arjunc196.notesActivities.AddNotes;
 
 public class CourseDetails extends AppCompatActivity {
 
@@ -21,7 +22,9 @@ public class CourseDetails extends AppCompatActivity {
     private TextView courseNameDetails;
     private TextView startDateDetails;
     private TextView endDateDetails;
+    private Button addNotesButton;
     private Button deleteButton;
+
 
     private ListView instructorListView;
     private InstructorAdapter adapter;
@@ -37,6 +40,7 @@ public class CourseDetails extends AppCompatActivity {
         startDateDetails = findViewById(R.id.startDateDetails);
         endDateDetails = findViewById(R.id.endDateDetails);
         deleteButton = findViewById(R.id.deleteButton);
+        addNotesButton = findViewById(R.id.addNote);
 
         // get the course ID passed through the intent
         Intent intent = getIntent();
@@ -89,11 +93,21 @@ public class CourseDetails extends AppCompatActivity {
             cursor1.close();
         });
 
+        addNotesButton.setOnClickListener(v -> {
+            addNotesButton.setOnClickListener(view -> {
+                Intent goToNotes = new Intent(CourseDetails.this, AddNotes.class);
+                startActivity(goToNotes);
+            });
+        });
+
+
         dbHelper = new DatabaseHelper(this);
         instructorListView = findViewById(R.id.instructorListView);
 
         adapter = new InstructorAdapter(this, null);
         instructorListView.setAdapter(adapter);
+
+
 
     }
 

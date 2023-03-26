@@ -70,22 +70,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailDetails" />
 
-    <ListView
-        android:id="@+id/coursesWithInstructorListView"
-        android:layout_width="314dp"
-        android:layout_height="356dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numberDetails" />
-
     <Button
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="16dp"
-        android:text="Delete Term"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="68dp"
+        android:text="Delete Instructor"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coursesWithInstructorListView" />
+        app:layout_constraintTop_toBottomOf="@+id/numberDetails" />
 </androidx.constraintlayout.widget.ConstraintLayout>
