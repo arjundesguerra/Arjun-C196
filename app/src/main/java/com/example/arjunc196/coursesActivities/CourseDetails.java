@@ -60,17 +60,14 @@ public class CourseDetails extends AppCompatActivity {
         }
         cursor.close();
 
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // delete the term from the database
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-                String selection = "id = ?";
-                String[] selectionArgs = { String.valueOf(termId) };
-                db.delete("courses", selection, selectionArgs);
-                Toast.makeText(CourseDetails.this, "Course deleted successfully", Toast.LENGTH_SHORT).show();
-                finish();
-            }
+        deleteButton.setOnClickListener(v -> {
+            // delete the term from the database
+            SQLiteDatabase db1 = dbHelper.getWritableDatabase();
+            String selection1 = "id = ?";
+            String[] selectionArgs1 = { String.valueOf(termId) };
+            db1.delete("courses", selection1, selectionArgs1);
+            Toast.makeText(CourseDetails.this, "Course deleted successfully", Toast.LENGTH_SHORT).show();
+            finish();
         });
 
     }

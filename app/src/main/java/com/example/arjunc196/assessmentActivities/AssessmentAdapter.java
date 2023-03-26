@@ -35,17 +35,20 @@ public class AssessmentAdapter extends CursorAdapter {
         TextView assessmentTypeTextView = view.findViewById(R.id.typeText);
         TextView startDateTextView = view.findViewById(R.id.startText);
         TextView endDateTextView = view.findViewById(R.id.endText);
+        TextView courseTextView = view.findViewById(R.id.courseText);
 
         String assessmentTitle = cursor.getString(cursor.getColumnIndexOrThrow("assessmentTitle"));
         String typeString = cursor.getString(cursor.getColumnIndexOrThrow("assessmentType"));
         String startDateString = cursor.getString(cursor.getColumnIndexOrThrow("startDate"));
         String endDateString = cursor.getString(cursor.getColumnIndexOrThrow("endDate"));
+        String courseString = cursor.getString(cursor.getColumnIndexOrThrow("courseTitle"));
 
 
         assessmentTitleTextView.setText(assessmentTitle);
         assessmentTypeTextView.setText(typeString);
         startDateTextView.setText(startDateString);
         endDateTextView.setText(endDateString);
+        courseTextView.setText(courseString);
 
 
         try {
