@@ -36,8 +36,8 @@
         android:id="@+id/assessmentsListView"
         android:layout_width="390dp"
         android:layout_height="543dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/assessmentsTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

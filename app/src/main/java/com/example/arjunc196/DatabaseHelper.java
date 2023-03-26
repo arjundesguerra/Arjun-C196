@@ -27,7 +27,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_INSTRUCTOR_EMAIL = "instructorEmail";
     private static final String KEY_INSTRUCTOR_NUMBER = "instructorNumber";
 
-    private static final String KEY_ASSESSMENT_ID = "assessment_id";
     private static final String KEY_ASSESSMENT_TITLE = "assessmentTitle";
     private static final String KEY_ASSESSMENT_TYPE = "assessmentType";
     private static final String KEY_ASSESSMENT_START_DATE = "startDate";
@@ -60,7 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + ")";
 
     private static final String CREATE_TABLE_ASSESSMENTS = "CREATE TABLE " + TABLE_ASSESSMENTS + "("
-            + KEY_ASSESSMENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + KEY_ASSESSMENT_TITLE + " TEXT, "
             + KEY_ASSESSMENT_TYPE + " TEXT,"
             + KEY_ASSESSMENT_START_DATE + " TEXT,"

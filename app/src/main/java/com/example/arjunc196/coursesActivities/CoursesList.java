@@ -40,13 +40,10 @@ public class CoursesList extends AppCompatActivity {
         courseListView.setAdapter(adapter);
 
         // go to course details
-        courseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(CoursesList.this, CourseDetails.class);
-                intent.putExtra("course_id", id);
-                startActivity(intent);
-            }
+        courseListView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(CoursesList.this, CourseDetails.class);
+            intent.putExtra("course_id", id);
+            startActivity(intent);
         });
     }
 
