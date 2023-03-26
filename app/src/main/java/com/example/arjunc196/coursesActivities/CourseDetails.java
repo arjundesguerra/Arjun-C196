@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.arjunc196.DatabaseHelper;
 import com.example.arjunc196.R;
+import com.example.arjunc196.termsActivities.TermDetails;
 
 public class CourseDetails extends AppCompatActivity {
 
@@ -35,7 +36,7 @@ public class CourseDetails extends AppCompatActivity {
 
         // get the term ID passed through the intent
         Intent intent = getIntent();
-        long termId = intent.getLongExtra("course_id", -1);
+        long courseId = intent.getLongExtra("course_id", -1);
 
         // fetch the term from the database using the term ID
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -46,7 +47,7 @@ public class CourseDetails extends AppCompatActivity {
                 "courseEndDate"
         };
         String selection = "id = ?";
-        String[] selectionArgs = { String.valueOf(termId) };
+        String[] selectionArgs = { String.valueOf(courseId) };
         Cursor cursor = db.query("courses", projection, selection, selectionArgs, null, null, null);
         if (cursor.moveToFirst()) {
             // display the term details in the UI
@@ -61,13 +62,26 @@ public class CourseDetails extends AppCompatActivity {
         cursor.close();
 
         deleteButton.setOnClickListener(v -> {
-            // delete the term from the database
-            SQLiteDatabase db1 = dbHelper.getWritableDatabase();
-            String selection1 = "id = ?";
-            String[] selectionArgs1 = { String.valueOf(termId) };
-            db1.delete("courses", selection1, selectionArgs1);
-            Toast.makeText(CourseDetails.this, "Course deleted successfully", Toast.LENGTH_SHORT).show();
-            finish();
+            // check if there are any assessments associated with this course
+            SQLiteDatabase db1 = dbHelper.getReadableDatabase();
+            String[] projection1 = { "id AS _id" };
+            String selection1 = "courseTitle = ?";
+            String[] selectionArgs1 = { courseNameDetails.getText().toString() };
+            Cursor cursor1 = db1.query("assessments", projection1, selection1, selectionArgs1, null, null, null);
+
+            if (cursor1.getCount() > 0) {
+                // if there are courses with this term, show a toast message
+                Toast.makeText(CourseDetails.this, "Cannot delete this course as it has an assessment associated with it", Toast.LENGTH_SHORT).show();
+            } else {
+                // delete the term from the database
+                SQLiteDatabase db2 = dbHelper.getWritableDatabase();
+                String selection2 = "id = ?";
+                String[] selectionArgs2 = { String.valueOf(courseId) };
+                db2.delete("courses", selection2, selectionArgs2);
+                Toast.makeText(CourseDetails.this, "Course deleted successfully", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+            cursor1.close();
         });
 
     }
