@@ -144,19 +144,24 @@ public class CourseDetails extends AppCompatActivity {
 
         String[] notesProjection = {
                 "id AS _id",
-                "noteTitle"
+                "noteTitle",
+                "courseTitle"
         };
         Cursor noteCursor = db.query("notes", notesProjection, null, null, null, null, null);
         noteAdapter.swapCursor(noteCursor);
 
         // go to instructor details
-        noteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(CourseDetails.this, NoteDetails.class);
-                intent.putExtra("note_id", id);
-                startActivity(intent);
-            }
+        instructorListView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(CourseDetails.this, InstructorDetails.class);
+            intent.putExtra("instructor_id", id);
+            startActivity(intent);
+        });
+
+        // go to note details
+        noteListView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(CourseDetails.this, NoteDetails.class);
+            intent.putExtra("note_id", id);
+            startActivity(intent);
         });
 
     }

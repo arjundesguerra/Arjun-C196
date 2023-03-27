@@ -143,11 +143,17 @@ public class AddCourses extends AppCompatActivity {
             contentValues.put("status", status);
             db.insert("courses", null, contentValues);
 
-            // puts course title in the instructor database as well
+            // puts course title in the instructor database
             ContentValues instructorContentValues = new ContentValues();
             instructorContentValues.put("courseTitle", courseTitle);
             String[] args = new String[]{instructorName};
             db.update("instructors", instructorContentValues, "instructorName=?", args);
+
+            // puts course title in the notes database
+            ContentValues notesContentValues = new ContentValues();
+            notesContentValues.put("courseTitle", courseTitle);
+            String[] notesArgs = new String[]{instructorName};
+            db.update("instructors", notesContentValues, "instructorName=?", notesArgs);
 
             // open the course list activity
             Intent intent = new Intent(AddCourses.this, CoursesList.class);
