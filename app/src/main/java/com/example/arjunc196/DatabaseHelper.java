@@ -11,7 +11,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_COURSES = "courses";
     private static final String TABLE_INSTRUCTORS = "instructors";
     private static final String TABLE_ASSESSMENTS = "assessments";
-
+    private static final String TABLE_NOTES = "notes";
 
     private static final String KEY_ID = "id";
     private static final String KEY_TERM_TITLE = "termTitle";
@@ -31,6 +31,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_ASSESSMENT_TYPE = "assessmentType";
     private static final String KEY_ASSESSMENT_START_DATE = "startDate";
     private static final String KEY_ASSESSMENT_END_DATE = "endDate";
+
+    private static final String KEY_NOTE_TITLE = "noteTitle";
+    private static final String KEY_NOTE_DETAILS = "noteDetails";
 
 
     private static final String CREATE_TABLE_TERMS = "CREATE TABLE " + TABLE_TERMS + "("
@@ -68,6 +71,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + "FOREIGN KEY(" + KEY_COURSE_TITLE + ") REFERENCES " + TABLE_COURSES + "(" + KEY_COURSE_TITLE + ")"
             + ")";
 
+    private static final String CREATE_TABLE_NOTES = "CREATE TABLE " + TABLE_NOTES + "("
+            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + KEY_NOTE_TITLE + " TEXT,"
+            + KEY_NOTE_DETAILS + " TEXT "
+            + ")";
+
 
 
     public DatabaseHelper(Context context) {
@@ -80,6 +89,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_COURSES);
         db.execSQL(CREATE_TABLE_INSTRUCTORS);
         db.execSQL(CREATE_TABLE_ASSESSMENTS);
+        db.execSQL(CREATE_TABLE_NOTES);
     }
 
     @Override
@@ -88,6 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_COURSES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_INSTRUCTORS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ASSESSMENTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTES);
 
         onCreate(db);
     }

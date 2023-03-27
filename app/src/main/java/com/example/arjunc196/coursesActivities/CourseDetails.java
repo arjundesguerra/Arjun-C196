@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,7 +16,11 @@ import android.widget.Toast;
 import com.example.arjunc196.DatabaseHelper;
 import com.example.arjunc196.R;
 import com.example.arjunc196.instructorActivities.InstructorAdapter;
+import com.example.arjunc196.instructorActivities.InstructorDetails;
+import com.example.arjunc196.instructorActivities.InstructorList;
 import com.example.arjunc196.notesActivities.AddNotes;
+import com.example.arjunc196.notesActivities.NoteAdapter;
+import com.example.arjunc196.notesActivities.NoteDetails;
 
 public class CourseDetails extends AppCompatActivity {
 
@@ -27,7 +33,9 @@ public class CourseDetails extends AppCompatActivity {
 
 
     private ListView instructorListView;
+    private ListView noteListView;
     private InstructorAdapter adapter;
+    private NoteAdapter noteAdapter;
 
 
     @Override
@@ -93,19 +101,21 @@ public class CourseDetails extends AppCompatActivity {
             cursor1.close();
         });
 
-        addNotesButton.setOnClickListener(v -> {
             addNotesButton.setOnClickListener(view -> {
                 Intent goToNotes = new Intent(CourseDetails.this, AddNotes.class);
                 startActivity(goToNotes);
-            });
         });
 
 
         dbHelper = new DatabaseHelper(this);
-        instructorListView = findViewById(R.id.instructorListView);
 
+        instructorListView = findViewById(R.id.instructorListView);
         adapter = new InstructorAdapter(this, null);
         instructorListView.setAdapter(adapter);
+
+        noteListView = findViewById(R.id.notesListView);
+        noteAdapter = new NoteAdapter(this, null);
+        noteListView.setAdapter(noteAdapter);
 
 
 
@@ -125,6 +135,26 @@ public class CourseDetails extends AppCompatActivity {
         };
         Cursor cursor = db.query("instructors", projection, null, null, null, null, null);
         adapter.swapCursor(cursor);
+
+        // fetch data from database and bind it to the list view
+
+        String[] notesProjection = {
+                "id AS _id",
+                "noteTitle"
+        };
+        Cursor noteCursor = db.query("notes", notesProjection, null, null, null, null, null);
+        noteAdapter.swapCursor(noteCursor);
+
+        // go to instructor details
+        noteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(CourseDetails.this, NoteDetails.class);
+                intent.putExtra("note_id", id);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -132,6 +162,8 @@ public class CourseDetails extends AppCompatActivity {
         super.onStop();
         // close the cursor to release resources
         adapter.swapCursor(null);
+        noteAdapter.swapCursor(null);
+
     }
 
     @Override
