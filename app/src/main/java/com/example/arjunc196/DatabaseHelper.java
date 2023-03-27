@@ -58,7 +58,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + KEY_INSTRUCTOR_NAME + " TEXT,"
             + KEY_INSTRUCTOR_EMAIL + " TEXT,"
-            + KEY_INSTRUCTOR_NUMBER + " TEXT "
+            + KEY_INSTRUCTOR_NUMBER + " TEXT, "
+            + KEY_COURSE_TITLE + " TEXT,"
+            + "FOREIGN KEY(" + KEY_COURSE_TITLE + ") REFERENCES " + TABLE_COURSES + "(" + KEY_COURSE_TITLE + ")"
             + ")";
 
     private static final String CREATE_TABLE_ASSESSMENTS = "CREATE TABLE " + TABLE_ASSESSMENTS + "("
@@ -74,7 +76,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_NOTES = "CREATE TABLE " + TABLE_NOTES + "("
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + KEY_NOTE_TITLE + " TEXT,"
-            + KEY_NOTE_DETAILS + " TEXT "
+            + KEY_NOTE_DETAILS + " TEXT, "
+            + KEY_COURSE_TITLE + " TEXT,"
+            + "FOREIGN KEY(" + KEY_COURSE_TITLE + ") REFERENCES " + TABLE_COURSES + "(" + KEY_COURSE_TITLE + ")"
             + ")";
 
 

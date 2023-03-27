@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.arjunc196.DatabaseHelper;
+import com.example.arjunc196.MainActivity;
 import com.example.arjunc196.R;
 import com.example.arjunc196.instructorActivities.InstructorAdapter;
 import com.example.arjunc196.instructorActivities.InstructorDetails;
@@ -131,9 +132,12 @@ public class CourseDetails extends AppCompatActivity {
                 "id AS _id",
                 "instructorName",
                 "instructorEmail",
-                "instructorNumber"
+                "instructorNumber",
+                "courseTitle"
         };
-        Cursor cursor = db.query("instructors", projection, null, null, null, null, null);
+        String selection = "courseTitle = ?";
+        String[] selectionArgs = { courseNameDetails.getText().toString() };
+        Cursor cursor = db.query("instructors", projection, selection, selectionArgs, null, null, null);
         adapter.swapCursor(cursor);
 
         // fetch data from database and bind it to the list view
@@ -171,4 +175,12 @@ public class CourseDetails extends AppCompatActivity {
         dbHelper.close();
         super.onDestroy();
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, CoursesList.class);
+        startActivity(intent);
+        finish();
+    }
 }
+

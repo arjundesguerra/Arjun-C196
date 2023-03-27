@@ -39,8 +39,8 @@
 
     <TextView
         android:id="@+id/instructorText"
-        android:layout_width="174dp"
-        android:layout_height="33dp"
+        android:layout_width="215dp"
+        android:layout_height="35dp"
         android:gravity="end"
         android:text="Instructor"
         android:textSize="25sp"

@@ -109,6 +109,7 @@ public class TermDetails extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         // fetch data from database and bind it to the list view
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String[] projection = {
@@ -120,9 +121,12 @@ public class TermDetails extends AppCompatActivity {
                 "instructorName",
                 "status"
         };
-        Cursor cursor = db.query("courses", projection, null, null, null, null, null);
+        String selection = "termTitle = ?";
+        String[] selectionArgs = { termTitleTextView.getText().toString() };
+        Cursor cursor = db.query("courses", projection, selection, selectionArgs, null, null, null);
         adapter.swapCursor(cursor);
     }
+
 
     @Override
     protected void onStop() {
