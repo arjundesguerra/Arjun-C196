@@ -69,9 +69,8 @@ public class AddNotes extends AppCompatActivity {
             contentValues.put("noteDetails", noteDetails);
             db.insert("notes", null, contentValues);
 
-            // open the course list activity
-            Intent intent = new Intent(AddNotes.this, CourseDetails.class);
-            startActivity(intent);
+            // open the course details activity
+            finish();
         });
 
     }

@@ -11,8 +11,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Term Title"
-        android:textSize="30sp"
-        android:textStyle="bold"></TextView>
+        android:textSize="30sp"></TextView>
 
 
 </LinearLayout>

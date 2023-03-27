@@ -41,9 +41,9 @@ public class CoursesList extends AppCompatActivity {
 
         // go to course details
         courseListView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(CoursesList.this, CourseDetails.class);
-            intent.putExtra("course_id", id);
-            startActivity(intent);
+            Intent courseIdIntent = new Intent(CoursesList.this, CourseDetails.class);
+            courseIdIntent.putExtra("course_id", id);
+            startActivity(courseIdIntent);
         });
     }
 

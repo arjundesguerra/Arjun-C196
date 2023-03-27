@@ -132,6 +132,7 @@ public class CourseDetails extends AppCompatActivity {
 
 
 
+
     }
 
     @Override
@@ -146,8 +147,9 @@ public class CourseDetails extends AppCompatActivity {
                 "instructorNumber",
                 "courseTitle"
         };
-
-        Cursor instructorCursor = db.query("instructors", instructorProjection, null, null, null, null, null);
+        String instructorSelection = "courseTitle = ?";
+        String[] instructorSelectionArgs = {courseNameDetails.getText().toString()};
+        Cursor instructorCursor = db.query("instructors", instructorProjection, instructorSelection, instructorSelectionArgs, null, null, null);
         instructorAdapter.swapCursor(instructorCursor);
 
         // fetch data from database and bind it to the list view
