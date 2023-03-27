@@ -16,66 +16,55 @@ import com.example.arjunc196.R;
 public class NoteDetails extends AppCompatActivity {
 
     private DatabaseHelper dbHelper;
-    private TextView assessmentNameDetails;
-    private TextView courseNameDetails;
-    private TextView assessmentTypeDetails;
-    private TextView startDateDetails;
-    private TextView endDateDetails;
+    private TextView noteNameDetails;
+    private TextView noteContentDetails;
     private Button deleteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_assessment_details);
+        setContentView(R.layout.activity_note_details);
 
         dbHelper = new DatabaseHelper(this);
-        assessmentNameDetails = findViewById(R.id.assessmentNameDetails);
-        courseNameDetails = findViewById(R.id.courseNameDetails);
-        assessmentTypeDetails = findViewById(R.id.assessmentTypeDetails);
-        startDateDetails = findViewById(R.id.startDateDetails);
-        endDateDetails = findViewById(R.id.endDateDetails);
+        noteNameDetails = findViewById(R.id.noteName);
+        noteContentDetails = findViewById(R.id.noteContent);
         deleteButton = findViewById(R.id.deleteButton);
 
-        // get the assessment ID passed through the intent
+        // get the note ID passed through the intent
         Intent intent = getIntent();
-        long assessmentId = intent.getLongExtra("assessment_id", -1);
+        long noteId = intent.getLongExtra("note_id", -1);
 
-        // fetch the assessment from the database using the assessment ID
+
+        // fetch the note from the database using the assessment ID
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String[] projection = {
                 "id AS _id",
-                "assessmentTitle",
-                "assessmentType",
-                "startDate",
-                "endDate",
-                "courseTitle"
+                "noteTitle",
+                "noteDetails"
         };
         String selection = "id = ?";
-        String[] selectionArgs = { String.valueOf(assessmentId) };
-        Cursor cursor = db.query("assessments", projection, selection, selectionArgs, null, null, null);
+        String[] selectionArgs = { String.valueOf( noteId ) };
+        Cursor cursor = db.query("notes", projection, selection, selectionArgs, null, null, null);
         if (cursor.moveToFirst()) {
-            // display the asssessment details in the UI
-            String assessmentName = cursor.getString(cursor.getColumnIndexOrThrow("assessmentTitle"));
-            String courseTitle = cursor.getString(cursor.getColumnIndexOrThrow("courseTitle"));
-            String asssesmentType = cursor.getString(cursor.getColumnIndexOrThrow("assessmentType"));
-            String startDate = cursor.getString(cursor.getColumnIndexOrThrow("startDate"));
-            String endDate = cursor.getString(cursor.getColumnIndexOrThrow("endDate"));
+            // display the note details in the UI
+            String noteTitle = cursor.getString(cursor.getColumnIndexOrThrow("noteTitle"));
+            String noteContent = cursor.getString(cursor.getColumnIndexOrThrow("noteDetails"));
 
-            assessmentNameDetails.setText(assessmentName);
-            courseNameDetails.setText(courseTitle);
-            assessmentTypeDetails.setText(asssesmentType);
-            startDateDetails.setText(startDate);
-            endDateDetails.setText(endDate);
+            noteNameDetails.setText(noteTitle);
+            noteContentDetails.setText(noteContent);
+
         }
         cursor.close();
 
+
+
         deleteButton.setOnClickListener(v -> {
-            // delete the assessment from the database
+            // delete the note from the database
             SQLiteDatabase db1 = dbHelper.getWritableDatabase();
             String selection1 = "id = ?";
-            String[] selectionArgs1 = { String.valueOf(assessmentId) };
-            db1.delete("assessments", selection1, selectionArgs1);
-            Toast.makeText(AssessmentDetails.this, "Assessment deleted successfully", Toast.LENGTH_SHORT).show();
+            String[] selectionArgs1 = { String.valueOf(noteId) };
+            db1.delete("notes", selection1, selectionArgs1);
+            Toast.makeText(NoteDetails.this, "Note deleted successfully", Toast.LENGTH_SHORT).show();
             finish();
         });
 
