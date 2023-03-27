@@ -230,3 +230,10 @@ public class AddCourses extends AppCompatActivity {
 
 
 }
+
+/*
+
+upon adding the course, a course title should also be sent to the notes class. it will create a new row, with only the course title being filled, everything else is null.
+when adding a note, that course title will be passed to the note, and upon submitting, the previously created row will fill the null values with values created in the add note activity.
+
+ */

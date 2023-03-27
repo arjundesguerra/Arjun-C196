@@ -35,7 +35,7 @@ public class CourseDetails extends AppCompatActivity {
 
     private ListView instructorListView;
     private ListView noteListView;
-    private InstructorAdapter adapter;
+    private InstructorAdapter instructorAdapter;
     private NoteAdapter noteAdapter;
 
 
@@ -50,6 +50,15 @@ public class CourseDetails extends AppCompatActivity {
         endDateDetails = findViewById(R.id.endDateDetails);
         deleteButton = findViewById(R.id.deleteButton);
         addNotesButton = findViewById(R.id.addNote);
+
+        instructorListView = findViewById(R.id.instructorListView);
+        instructorAdapter = new InstructorAdapter(this, null);
+        instructorListView.setAdapter(instructorAdapter);
+
+        noteListView = findViewById(R.id.notesListView);
+        noteAdapter = new NoteAdapter(this, null);
+        noteListView.setAdapter(noteAdapter);
+
 
         // get the course ID passed through the intent
         Intent intent = getIntent();
@@ -78,6 +87,20 @@ public class CourseDetails extends AppCompatActivity {
         }
 
         cursor.close();
+
+        // go to instructor details
+        instructorListView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent instructorIntent = new Intent(CourseDetails.this, InstructorDetails.class);
+            instructorIntent.putExtra("instructor_id", id);
+            startActivity(instructorIntent);
+        });
+
+        // go to note details
+        noteListView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent noteIntent = new Intent(CourseDetails.this, NoteDetails.class);
+            noteIntent.putExtra("note_id", id);
+            startActivity(noteIntent);
+        });
 
         deleteButton.setOnClickListener(v -> {
             // check if there are any assessments associated with this course
@@ -108,40 +131,26 @@ public class CourseDetails extends AppCompatActivity {
         });
 
 
-        dbHelper = new DatabaseHelper(this);
-
-        instructorListView = findViewById(R.id.instructorListView);
-        adapter = new InstructorAdapter(this, null);
-        instructorListView.setAdapter(adapter);
-
-        noteListView = findViewById(R.id.notesListView);
-        noteAdapter = new NoteAdapter(this, null);
-        noteListView.setAdapter(noteAdapter);
-
-
 
     }
 
-    //instructor list view methods
     @Override
-    protected void onStart() {
-        super.onStart();
-        // fetch data from database and bind it to the list view
+    protected void onResume() {
+        super.onResume();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String[] projection = {
+        // fetch data from database and bind it to the list view
+        String[] instructorProjection = {
                 "id AS _id",
                 "instructorName",
                 "instructorEmail",
                 "instructorNumber",
                 "courseTitle"
         };
-        String selection = "courseTitle = ?";
-        String[] selectionArgs = { courseNameDetails.getText().toString() };
-        Cursor cursor = db.query("instructors", projection, selection, selectionArgs, null, null, null);
-        adapter.swapCursor(cursor);
+
+        Cursor instructorCursor = db.query("instructors", instructorProjection, null, null, null, null, null);
+        instructorAdapter.swapCursor(instructorCursor);
 
         // fetch data from database and bind it to the list view
-
         String[] notesProjection = {
                 "id AS _id",
                 "noteTitle",
@@ -150,27 +159,13 @@ public class CourseDetails extends AppCompatActivity {
         Cursor noteCursor = db.query("notes", notesProjection, null, null, null, null, null);
         noteAdapter.swapCursor(noteCursor);
 
-        // go to instructor details
-        instructorListView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(CourseDetails.this, InstructorDetails.class);
-            intent.putExtra("instructor_id", id);
-            startActivity(intent);
-        });
-
-        // go to note details
-        noteListView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(CourseDetails.this, NoteDetails.class);
-            intent.putExtra("note_id", id);
-            startActivity(intent);
-        });
-
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         // close the cursor to release resources
-        adapter.swapCursor(null);
+        instructorAdapter.swapCursor(null);
         noteAdapter.swapCursor(null);
 
     }
