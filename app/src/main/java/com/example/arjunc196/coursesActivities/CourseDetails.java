@@ -130,9 +130,6 @@ public class CourseDetails extends AppCompatActivity {
                 startActivity(goToNotes);
         });
 
-
-
-
     }
 
     @Override
@@ -158,7 +155,10 @@ public class CourseDetails extends AppCompatActivity {
                 "noteTitle",
                 "courseTitle"
         };
-        Cursor noteCursor = db.query("notes", notesProjection, null, null, null, null, null);
+        String noteSelection = "courseTitle = ?";
+        String[] noteSelectionArgs = {courseNameDetails.getText().toString()};
+
+        Cursor noteCursor = db.query("notes", notesProjection, noteSelection, noteSelectionArgs, null, null, null);
         noteAdapter.swapCursor(noteCursor);
 
     }

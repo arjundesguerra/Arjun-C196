@@ -3,6 +3,7 @@ package com.example.arjunc196.instructorActivities;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,8 +41,24 @@ public class InstructorAdapter extends CursorAdapter {
         emailTextView.setText(email);
         numberTextView.setText(number);
 
-
-
     }
 
+    @Override
+    public Cursor swapCursor(Cursor newCursor) {
+        return super.swapCursor(newCursor);
+    }
+
+    public Cursor getCursorForCourse(String courseTitle, SQLiteDatabase db) {
+        String[] instructorProjection = {
+                "id AS _id",
+                "instructorName",
+                "instructorEmail",
+                "instructorNumber",
+                "courseTitle"
+        };
+        String instructorSelection = "courseTitle = ?";
+        String[] instructorSelectionArgs = {courseTitle};
+        return db.query("instructors", instructorProjection, instructorSelection, instructorSelectionArgs, null, null, null);
+    }
 }
+

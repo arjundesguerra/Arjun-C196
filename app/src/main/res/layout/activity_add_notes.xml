@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
-    tools:context=".termsActivities.AddTerms">
+    tools:context=".termsActivities.AddTerms"
+    app:layout_constraintVertical_bias="0.5"
+    app:layout_constraintHorizontal_bias="0.5">
 
     <TextView
         android:id="@+id/addNoteText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
+        android:layout_marginStart="128dp"
         android:layout_marginTop="32dp"
         android:gravity="center"
         android:text="Add a Note"
@@ -25,7 +27,7 @@
         android:id="@+id/editNoteTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="94dp"
+        android:layout_marginStart="98dp"
         android:layout_marginTop="64dp"
         android:ems="10"
         android:gravity="center"
@@ -39,7 +41,7 @@
         android:id="@+id/editNoteDetails"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="52dp"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:gravity="top"
@@ -50,14 +52,25 @@
         app:layout_constraintTop_toBottomOf="@+id/editNoteTitle" />
 
     <Button
+        android:id="@+id/selectCourseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Select Course"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editNoteDetails" />
+
+    <Button
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="154dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="24dp"
         android:text="Submit"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editNoteDetails" />
+        app:layout_constraintTop_toBottomOf="@+id/selectCourseButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

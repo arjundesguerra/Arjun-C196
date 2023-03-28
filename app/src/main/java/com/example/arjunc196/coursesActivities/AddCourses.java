@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.example.arjunc196.DatabaseHelper;
 import com.example.arjunc196.R;
@@ -133,6 +134,15 @@ public class AddCourses extends AppCompatActivity {
             String instructorName = instructorButton.getText().toString();
 
             SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+            // check if the instructor is already assigned to a course
+            Cursor instructorCursor = db.rawQuery("SELECT * FROM courses WHERE instructorName = ? AND status <> 'Dropped'", new String[]{instructorName});
+            if (instructorCursor.getCount() > 0) {
+                // if the instructor is already assigned to a course, create a toast that says you can't pick that instructor
+                Toast.makeText(this, "You can't pick " + instructorName + " as the instructor because they are already assigned to a course", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             // insert the course information into the database row for the selected term title
             ContentValues contentValues = new ContentValues();
             contentValues.put("courseTitle", courseTitle);
@@ -159,6 +169,7 @@ public class AddCourses extends AppCompatActivity {
             Intent intent = new Intent(AddCourses.this, CoursesList.class);
             startActivity(intent);
         });
+
 
     }
 
@@ -231,9 +242,3 @@ public class AddCourses extends AppCompatActivity {
 
 }
 
-/*
-
-upon adding the course, a course title should also be sent to the notes class. it will create a new row, with only the course title being filled, everything else is null.
-when adding a note, that course title will be passed to the note, and upon submitting, the previously created row will fill the null values with values created in the add note activity.
-
- */
