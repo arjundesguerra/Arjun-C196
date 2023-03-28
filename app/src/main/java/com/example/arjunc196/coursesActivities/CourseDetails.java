@@ -2,6 +2,7 @@ package com.example.arjunc196.coursesActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -29,6 +30,7 @@ public class CourseDetails extends AppCompatActivity {
     private TextView courseNameDetails;
     private TextView startDateDetails;
     private TextView endDateDetails;
+    private Button editCourseButton;
     private Button addNotesButton;
     private Button deleteButton;
 
@@ -48,6 +50,7 @@ public class CourseDetails extends AppCompatActivity {
         courseNameDetails = findViewById(R.id.courseNameDetails);
         startDateDetails = findViewById(R.id.startDateDetails);
         endDateDetails = findViewById(R.id.endDateDetails);
+        editCourseButton = findViewById(R.id.editButton);
         deleteButton = findViewById(R.id.deleteButton);
         addNotesButton = findViewById(R.id.addNote);
 
@@ -102,6 +105,12 @@ public class CourseDetails extends AppCompatActivity {
             startActivity(noteIntent);
         });
 
+        editCourseButton.setOnClickListener(v -> {
+            Intent goToEdit = new Intent(CourseDetails.this, EditCourse.class);
+            goToEdit.putExtra("course_title", courseNameDetails.getText().toString());
+            startActivity(goToEdit);
+        });
+
         deleteButton.setOnClickListener(v -> {
             // check if there are any assessments associated with this course
             SQLiteDatabase db1 = dbHelper.getReadableDatabase();
@@ -135,8 +144,34 @@ public class CourseDetails extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        // refreshes the course details
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        // fetch data from database and bind it to the list view
+
+        Intent intent = getIntent();
+        long courseId = intent.getLongExtra("course_id", -1);
+        String[] projection = {
+                "id AS _id",
+                "courseTitle",
+                "courseStartDate",
+                "courseEndDate"
+        };
+        String selection = "id = ?";
+        String[] selectionArgs = { String.valueOf(courseId) };
+        Cursor cursor = db.query("courses", projection, selection, selectionArgs, null, null, null);
+        if (cursor.moveToFirst()) {
+            @SuppressLint("Range") String courseTitle = cursor.getString(cursor.getColumnIndex("courseTitle"));
+            @SuppressLint("Range") String startDate = cursor.getString(cursor.getColumnIndex("courseStartDate"));
+            @SuppressLint("Range") String endDate = cursor.getString(cursor.getColumnIndex("courseEndDate"));
+
+            // update the UI with the fetched course details
+            courseNameDetails.setText(courseTitle);
+            startDateDetails.setText(startDate);
+            endDateDetails.setText(endDate);
+        }
+
+
+
+        // fetch instructor data from database and bind it to the list view
         String[] instructorProjection = {
                 "id AS _id",
                 "instructorName",
@@ -149,7 +184,7 @@ public class CourseDetails extends AppCompatActivity {
         Cursor instructorCursor = db.query("instructors", instructorProjection, instructorSelection, instructorSelectionArgs, null, null, null);
         instructorAdapter.swapCursor(instructorCursor);
 
-        // fetch data from database and bind it to the list view
+        // fetch note data from database and bind it to the list view
         String[] notesProjection = {
                 "id AS _id",
                 "noteTitle",
