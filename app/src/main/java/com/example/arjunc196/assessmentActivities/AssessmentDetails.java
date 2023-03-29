@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.example.arjunc196.DatabaseHelper;
 import com.example.arjunc196.R;
+import com.example.arjunc196.coursesActivities.CourseDetails;
+import com.example.arjunc196.coursesActivities.EditCourse;
 
 public class AssessmentDetails extends AppCompatActivity {
 
@@ -21,6 +23,7 @@ public class AssessmentDetails extends AppCompatActivity {
     private TextView assessmentTypeDetails;
     private TextView startDateDetails;
     private TextView endDateDetails;
+    private Button editButton;
     private Button deleteButton;
 
     @Override
@@ -34,6 +37,7 @@ public class AssessmentDetails extends AppCompatActivity {
         assessmentTypeDetails = findViewById(R.id.assessmentTypeDetails);
         startDateDetails = findViewById(R.id.startDateDetails);
         endDateDetails = findViewById(R.id.endDateDetails);
+        editButton = findViewById(R.id.editButton);
         deleteButton = findViewById(R.id.deleteButton);
 
         // get the assessment ID passed through the intent
@@ -68,6 +72,11 @@ public class AssessmentDetails extends AppCompatActivity {
             endDateDetails.setText(endDate);
         }
         cursor.close();
+
+        editButton.setOnClickListener(v -> {
+            Intent goToEdit = new Intent(AssessmentDetails.this, EditAssessment.class);
+            startActivity(goToEdit);
+        });
 
         deleteButton.setOnClickListener(v -> {
             // delete the assessment from the database

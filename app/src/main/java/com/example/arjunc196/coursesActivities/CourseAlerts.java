@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -68,6 +69,10 @@ public class CourseAlerts extends AppCompatActivity {
         });
 
         submitButton.setOnClickListener(v -> {
+            if (timeButton.getText().toString().equals("Select a Time")) {
+                Toast.makeText(CourseAlerts.this, "Please select a time", Toast.LENGTH_SHORT).show();
+                return;
+            }
             // Get selected time
             Calendar calendar = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm a", Locale.US);
@@ -77,22 +82,27 @@ public class CourseAlerts extends AppCompatActivity {
                 Date startTime = sdf.parse(startTimeString);
                 Date endTime = sdf.parse(endTimeString);
                 calendar.setTime(startTime);
+                calendar.set(Calendar.SECOND, 0); // set seconds to 0
                 // Schedule alert for start time
                 AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                Intent startIntent = new Intent(CourseAlerts.this, AlertReceiver.class);
-                startIntent.putExtra("message", "Course starts now");
+                Intent startIntent = new Intent(CourseAlerts.this, CourtAlertReceiver.class);
+                startIntent.putExtra("message", "Alert: Course starts now");
+                startIntent.putExtra("ringtone", RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM));
                 PendingIntent startPendingIntent = PendingIntent.getBroadcast(
                         CourseAlerts.this, 0, startIntent, 0);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), startPendingIntent);
 
                 // Schedule alert for end time
                 calendar.setTime(endTime);
-                Intent endIntent = new Intent(CourseAlerts.this, AlertReceiver.class);
-                endIntent.putExtra("message", "Course ends now");
+                calendar.set(Calendar.SECOND, 0); // set seconds to 0
+                Intent endIntent = new Intent(CourseAlerts.this, CourtAlertReceiver.class);
+                endIntent.putExtra("message", "Alert: Course ends now");
+                endIntent.putExtra("ringtone", RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM));
                 PendingIntent endPendingIntent = PendingIntent.getBroadcast(
                         CourseAlerts.this, 1, endIntent, 0);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), endPendingIntent);
-                Toast.makeText(CourseAlerts.this, "Alarm has been set", Toast.LENGTH_SHORT).show();
+                String toastMessage = "Alarm has been set for " + startTimeString + " and " + endTimeString;
+                Toast.makeText(CourseAlerts.this, toastMessage, Toast.LENGTH_LONG).show();
 
 
             } catch (ParseException e) {
@@ -101,6 +111,8 @@ public class CourseAlerts extends AppCompatActivity {
 
             finish();
         });
+
+
     }
 
 }
