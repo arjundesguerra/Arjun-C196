@@ -7,19 +7,15 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.arjunc196.DatabaseHelper;
-import com.example.arjunc196.MainActivity;
 import com.example.arjunc196.R;
 import com.example.arjunc196.instructorActivities.InstructorAdapter;
 import com.example.arjunc196.instructorActivities.InstructorDetails;
-import com.example.arjunc196.instructorActivities.InstructorList;
 import com.example.arjunc196.notesActivities.AddNotes;
 import com.example.arjunc196.notesActivities.NoteAdapter;
 import com.example.arjunc196.notesActivities.NoteDetails;
@@ -33,6 +29,7 @@ public class CourseDetails extends AppCompatActivity {
     private Button editCourseButton;
     private Button addNotesButton;
     private Button deleteButton;
+    private Button alertButton;
 
 
     private ListView instructorListView;
@@ -52,6 +49,7 @@ public class CourseDetails extends AppCompatActivity {
         endDateDetails = findViewById(R.id.endDateDetails);
         editCourseButton = findViewById(R.id.editButton);
         deleteButton = findViewById(R.id.deleteButton);
+        alertButton = findViewById(R.id.alertButton);
         addNotesButton = findViewById(R.id.addNote);
 
         instructorListView = findViewById(R.id.instructorListView);
@@ -109,6 +107,14 @@ public class CourseDetails extends AppCompatActivity {
             Intent goToEdit = new Intent(CourseDetails.this, EditCourse.class);
             goToEdit.putExtra("course_title", courseNameDetails.getText().toString());
             startActivity(goToEdit);
+        });
+
+        alertButton.setOnClickListener(v -> {
+            Intent goToAlerts = new Intent(CourseDetails.this, CourseAlerts.class);
+            // add start and end dates as extras
+            goToAlerts.putExtra("startDate", startDateDetails.getText().toString());
+            goToAlerts.putExtra("endDate", endDateDetails.getText().toString());
+            startActivity(goToAlerts);
         });
 
         deleteButton.setOnClickListener(v -> {

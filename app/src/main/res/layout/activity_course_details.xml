@@ -79,6 +79,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/endDateDetails" />
 
+
+    <Button
+        android:id="@+id/alertButton"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="117dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="116dp"
+        android:text="Create alert for dates"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editButton" />
+
     <ListView
         android:id="@+id/instructorListView"
         android:layout_width="391dp"
@@ -125,14 +138,13 @@
         android:id="@+id/instructorDetails"
         android:layout_width="273dp"
         android:layout_height="72dp"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="68dp"
         android:gravity="center"
         android:text="Instructor Details"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/deleteButton" />
+        app:layout_constraintTop_toBottomOf="@+id/alertButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
