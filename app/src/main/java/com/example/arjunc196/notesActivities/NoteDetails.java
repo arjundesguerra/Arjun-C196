@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ public class NoteDetails extends AppCompatActivity {
     private DatabaseHelper dbHelper;
     private TextView noteNameDetails;
     private TextView noteContentDetails;
+    private Button shareNote;
     private Button deleteButton;
 
     @Override
@@ -28,6 +30,7 @@ public class NoteDetails extends AppCompatActivity {
         dbHelper = new DatabaseHelper(this);
         noteNameDetails = findViewById(R.id.noteName);
         noteContentDetails = findViewById(R.id.noteContent);
+        shareNote = findViewById(R.id.shareNote);
         deleteButton = findViewById(R.id.deleteButton);
 
         // get the note ID passed through the intent
@@ -56,7 +59,15 @@ public class NoteDetails extends AppCompatActivity {
         }
         cursor.close();
 
+        shareNote.setOnClickListener(v -> {
+            // create an intent to send an SMS
+            Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+            sendIntent.setData(Uri.parse("sms:"));
+            sendIntent.putExtra("sms_body", "Note Title: " + noteNameDetails.getText().toString() + "\n\nNote Details: " + noteContentDetails.getText().toString());
 
+            // start the activity to send the SMS
+            startActivity(sendIntent);
+        });
 
         deleteButton.setOnClickListener(v -> {
             // delete the note from the database
