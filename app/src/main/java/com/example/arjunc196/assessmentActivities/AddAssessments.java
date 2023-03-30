@@ -82,17 +82,14 @@ public class AddAssessments extends AppCompatActivity {
             popupMenu.getMenu().add("Objective Assessment");
             popupMenu.getMenu().add("Performance Assessment");
 
-            // set a click listener on the menu items to handle the selection
             popupMenu.setOnMenuItemClickListener(menuItem -> {
-                // set the text of the status button to the selected option
                 typeButton.setText(menuItem.getTitle());
                 return true;
             });
 
-            // show the popup menu
             popupMenu.show();
 
-            // hide the soft keyboard
+            // hides keyboard
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
