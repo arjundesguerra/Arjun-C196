@@ -78,13 +78,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".assessmentActivities.AssessmentAdapter"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".assessmentActivities.AddAssessments"
             android:exported="false">
             <meta-data

@@ -98,8 +98,8 @@ public class AddInstructors extends AppCompatActivity {
                 startActivity(intent);
             }
 
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
