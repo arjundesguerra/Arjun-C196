@@ -28,8 +28,8 @@ public class CourseDetails extends AppCompatActivity {
     private TextView endDateDetails;
     private Button editCourseButton;
     private Button addNotesButton;
-    private Button deleteButton;
     private Button alertButton;
+    private Button deleteButton;
 
 
     private ListView instructorListView;

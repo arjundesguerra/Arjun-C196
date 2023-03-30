@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.arjunc196.DatabaseHelper;
 import com.example.arjunc196.R;
+import com.example.arjunc196.coursesActivities.CourseAlerts;
 import com.example.arjunc196.coursesActivities.CourseDetails;
 import com.example.arjunc196.coursesActivities.EditCourse;
 
@@ -24,6 +25,7 @@ public class AssessmentDetails extends AppCompatActivity {
     private TextView startDateDetails;
     private TextView endDateDetails;
     private Button editButton;
+    private Button alertButton;
     private Button deleteButton;
 
     @Override
@@ -38,6 +40,7 @@ public class AssessmentDetails extends AppCompatActivity {
         startDateDetails = findViewById(R.id.startDateDetails);
         endDateDetails = findViewById(R.id.endDateDetails);
         editButton = findViewById(R.id.editButton);
+        alertButton = findViewById(R.id.alertButton);
         deleteButton = findViewById(R.id.deleteButton);
 
         // get the assessment ID passed through the intent
@@ -89,6 +92,15 @@ public class AssessmentDetails extends AppCompatActivity {
             Toast.makeText(AssessmentDetails.this, "Assessment deleted successfully", Toast.LENGTH_SHORT).show();
             finish();
         });
+
+        alertButton.setOnClickListener(v -> {
+            Intent goToAlerts = new Intent(AssessmentDetails.this, AssessmentAlerts.class);
+            // add start and end dates as extras
+            goToAlerts.putExtra("startDate", startDateDetails.getText().toString());
+            goToAlerts.putExtra("endDate", endDateDetails.getText().toString());
+            startActivity(goToAlerts);
+        });
+
 
     }
 
