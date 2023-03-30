@@ -45,6 +45,7 @@ public class AddAssessments extends AppCompatActivity {
         setContentView(R.layout.activity_add_assessments);
         getSupportActionBar().setTitle("Add Assessments");
 
+
         dbHelper = new DatabaseHelper(this);
         db = dbHelper.getReadableDatabase();
 
@@ -134,7 +135,19 @@ public class AddAssessments extends AppCompatActivity {
             startActivity(intent);
         });
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // Handle the back button click
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
