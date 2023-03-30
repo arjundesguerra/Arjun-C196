@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.arjunc196.DatabaseHelper;
 import com.example.arjunc196.R;
@@ -97,6 +98,12 @@ public class EditAssessment extends AppCompatActivity {
             String endDateText = editEndDate.getText().toString();
 
             SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+            if (typeText.equals("Edit Assessment Type") || startDateText.equals("Edit Start Date") || endDateText.equals("Edit End Date")) {
+                Toast.makeText(this, "All fields must be filled out", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
 
 
             // update the course information into the database row for the selected course

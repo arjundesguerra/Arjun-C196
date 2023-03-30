@@ -105,6 +105,10 @@ public class EditCourse extends AppCompatActivity {
 
             SQLiteDatabase db = dbHelper.getWritableDatabase();
 
+            if (statusText.equals("Edit Status") || startDateText.equals("Edit Start Date") || endDateText.equals("Edit End Date")) {
+                Toast.makeText(this, "All fields must be filled out", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             // update the course information into the database row for the selected course
             ContentValues contentValues = new ContentValues();
