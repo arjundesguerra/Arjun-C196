@@ -58,16 +58,16 @@ public class AssessmentDetails extends AppCompatActivity {
         String[] selectionArgs = { String.valueOf(assessmentId) };
         Cursor cursor = db.query("assessments", projection, selection, selectionArgs, null, null, null);
         if (cursor.moveToFirst()) {
-            // display the asssessment details in the UI
+            // display the assessment details in the UI
             String assessmentName = cursor.getString(cursor.getColumnIndexOrThrow("assessmentTitle"));
             String courseTitle = cursor.getString(cursor.getColumnIndexOrThrow("courseTitle"));
-            String asssesmentType = cursor.getString(cursor.getColumnIndexOrThrow("assessmentType"));
+            String assesmentType = cursor.getString(cursor.getColumnIndexOrThrow("assessmentType"));
             String startDate = cursor.getString(cursor.getColumnIndexOrThrow("startDate"));
             String endDate = cursor.getString(cursor.getColumnIndexOrThrow("endDate"));
 
             assessmentNameDetails.setText(assessmentName);
             courseNameDetails.setText(courseTitle);
-            assessmentTypeDetails.setText(asssesmentType);
+            assessmentTypeDetails.setText(assesmentType);
             startDateDetails.setText(startDate);
             endDateDetails.setText(endDate);
         }
@@ -75,6 +75,8 @@ public class AssessmentDetails extends AppCompatActivity {
 
         editButton.setOnClickListener(v -> {
             Intent goToEdit = new Intent(AssessmentDetails.this, EditAssessment.class);
+            goToEdit.putExtra("assessment_name", assessmentNameDetails.getText().toString());
+            goToEdit.putExtra("course_title", courseNameDetails.getText().toString());
             startActivity(goToEdit);
         });
 
@@ -88,6 +90,40 @@ public class AssessmentDetails extends AppCompatActivity {
             finish();
         });
 
+    }
+
+    protected void onResume() {
+        // refreshes details page
+        super.onResume();
+        Intent intent = getIntent();
+        long assessmentId = intent.getLongExtra("assessment_id", -1);
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] projection = {
+                "id AS _id",
+                "assessmentTitle",
+                "assessmentType",
+                "startDate",
+                "endDate",
+                "courseTitle"
+        };
+        String selection = "id = ?";
+        String[] selectionArgs = {String.valueOf(assessmentId)};
+        Cursor cursor = db.query("assessments", projection, selection, selectionArgs, null, null, null);
+        if (cursor.moveToFirst()) {
+            String assessmentName = cursor.getString(cursor.getColumnIndexOrThrow("assessmentTitle"));
+            String courseTitle = cursor.getString(cursor.getColumnIndexOrThrow("courseTitle"));
+            String assesmentType = cursor.getString(cursor.getColumnIndexOrThrow("assessmentType"));
+            String startDate = cursor.getString(cursor.getColumnIndexOrThrow("startDate"));
+            String endDate = cursor.getString(cursor.getColumnIndexOrThrow("endDate"));
+
+            assessmentNameDetails.setText(assessmentName);
+            courseNameDetails.setText(courseTitle);
+            assessmentTypeDetails.setText(assesmentType);
+            startDateDetails.setText(startDate);
+            endDateDetails.setText(endDate);
+        }
+        cursor.close();
     }
 
     @Override
