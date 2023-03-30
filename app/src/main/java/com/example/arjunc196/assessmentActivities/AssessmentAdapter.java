@@ -64,16 +64,4 @@ public class AssessmentAdapter extends CursorAdapter {
         }
     }
 
-
-
-    private void setDateText(TextView textView, String dateString) {
-        try {
-            // Parse the dateString into a Date object
-            Date date = dateFormat.parse(dateString);
-            // Format the Date object into a string and set the text of the TextView
-            textView.setText(dateFormat.format(date));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
 }

@@ -32,6 +32,7 @@ public class AssessmentAlerts extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assessment_alerts);
+        getSupportActionBar().setTitle("Create Assessment Alert");
 
         startDate = findViewById(R.id.startDate);
         endDate = findViewById(R.id.endDate);

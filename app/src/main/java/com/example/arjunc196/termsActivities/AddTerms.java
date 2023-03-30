@@ -38,6 +38,8 @@ public class AddTerms extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_terms);
 
+        getSupportActionBar().setTitle("Add Terms");
+
         dbHelper = new DatabaseHelper(this);
 
         termTitleEditText = findViewById(R.id.editTermTitle);

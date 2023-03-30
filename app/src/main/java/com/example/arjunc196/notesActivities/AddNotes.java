@@ -35,6 +35,8 @@ public class AddNotes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_notes);
 
+        getSupportActionBar().setTitle("Add Notes");
+
         dbHelper = new DatabaseHelper(this);
         db = dbHelper.getReadableDatabase();
 

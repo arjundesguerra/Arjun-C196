@@ -42,6 +42,8 @@ public class EditCourse extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_course);
 
+        getSupportActionBar().setTitle("Edit Course");
+
         dbHelper = new DatabaseHelper(this);
         db = dbHelper.getReadableDatabase();
 

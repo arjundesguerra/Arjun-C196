@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.example.arjunc196.DatabaseHelper;
 import com.example.arjunc196.R;
 
+import java.util.ArrayList;
+
 public class NoteDetails extends AppCompatActivity {
 
     private DatabaseHelper dbHelper;
@@ -26,6 +28,8 @@ public class NoteDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_details);
+
+        getSupportActionBar().setTitle("Note Details");
 
         dbHelper = new DatabaseHelper(this);
         noteNameDetails = findViewById(R.id.noteName);
@@ -40,14 +44,14 @@ public class NoteDetails extends AppCompatActivity {
 
         // fetch the note from the database using the assessment ID
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String[] projection = {
-                "id AS _id",
-                "noteTitle",
-                "noteDetails"
-        };
+        ArrayList<String> projection = new ArrayList<>();
+        projection.add("id AS _id");
+        projection.add("noteTitle");
+        projection.add("noteDetails");
+
         String selection = "id = ?";
-        String[] selectionArgs = { String.valueOf( noteId ) };
-        Cursor cursor = db.query("notes", projection, selection, selectionArgs, null, null, null);
+        String[] selectionArgs = { String.valueOf(noteId) };
+        Cursor cursor = db.query("notes", projection.toArray(new String[0]), selection, selectionArgs, null, null, null);
         if (cursor.moveToFirst()) {
             // display the note details in the UI
             String noteTitle = cursor.getString(cursor.getColumnIndexOrThrow("noteTitle"));
@@ -55,9 +59,9 @@ public class NoteDetails extends AppCompatActivity {
 
             noteNameDetails.setText(noteTitle);
             noteContentDetails.setText(noteContent);
-
         }
         cursor.close();
+
 
         shareNote.setOnClickListener(v -> {
             // create an intent to send an SMS

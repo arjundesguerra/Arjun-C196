@@ -15,6 +15,9 @@ import com.example.arjunc196.R;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class AssessmentsList extends AppCompatActivity {
 
     private ListView assessmentsListView;
@@ -25,6 +28,8 @@ public class AssessmentsList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assessment_list);
+
+        getSupportActionBar().setTitle("Assessments List");
 
         // go to add assessments
         FloatingActionButton addCourseButton = findViewById(R.id.addAssessmentButton);
@@ -53,17 +58,18 @@ public class AssessmentsList extends AppCompatActivity {
         super.onStart();
         // fetch data from database and bind it to the list view
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String[] projection = {
+        ArrayList<String> projection = new ArrayList<>(Arrays.asList(
                 "id AS _id",
                 "assessmentTitle",
                 "assessmentType",
                 "startDate",
                 "endDate",
                 "courseTitle"
-        };
-        Cursor cursor = db.query("assessments", projection, null, null, null, null, null);
+        ));
+        Cursor cursor = db.query("assessments", projection.toArray(new String[0]), null, null, null, null, null);
         adapter.swapCursor(cursor);
     }
+
 
 
     @Override

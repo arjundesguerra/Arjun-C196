@@ -20,6 +20,8 @@ import com.example.arjunc196.notesActivities.AddNotes;
 import com.example.arjunc196.notesActivities.NoteAdapter;
 import com.example.arjunc196.notesActivities.NoteDetails;
 
+import java.util.ArrayList;
+
 public class CourseDetails extends AppCompatActivity {
 
     private DatabaseHelper dbHelper;
@@ -42,6 +44,8 @@ public class CourseDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_details);
+
+        getSupportActionBar().setTitle("Course Details");
 
         dbHelper = new DatabaseHelper(this);
         courseNameDetails = findViewById(R.id.courseNameDetails);
@@ -67,15 +71,17 @@ public class CourseDetails extends AppCompatActivity {
 
         // fetch the course from the database using the course ID
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String[] projection = {
-                "id AS _id",
-                "courseTitle",
-                "courseStartDate",
-                "courseEndDate"
-        };
+        ArrayList<String> projectionList = new ArrayList<>();
+        projectionList.add("id AS _id");
+        projectionList.add("courseTitle");
+        projectionList.add("courseStartDate");
+        projectionList.add("courseEndDate");
+
         String selection = "id = ?";
         String[] selectionArgs = { String.valueOf(courseId) };
-        Cursor cursor = db.query("courses", projection, selection, selectionArgs, null, null, null);
+
+        Cursor cursor = db.query("courses", projectionList.toArray(new String[projectionList.size()]), selection, selectionArgs, null, null, null);
+
         if (cursor.moveToFirst()) {
             // display the course details in the UI
             String courseTitle = cursor.getString(cursor.getColumnIndexOrThrow("courseTitle"));
@@ -88,6 +94,7 @@ public class CourseDetails extends AppCompatActivity {
         }
 
         cursor.close();
+
 
         // go to instructor details
         instructorListView.setOnItemClickListener((parent, view, position, id) -> {
@@ -155,12 +162,12 @@ public class CourseDetails extends AppCompatActivity {
 
         Intent intent = getIntent();
         long courseId = intent.getLongExtra("course_id", -1);
-        String[] projection = {
-                "id AS _id",
-                "courseTitle",
-                "courseStartDate",
-                "courseEndDate"
-        };
+        ArrayList<String> projectionList = new ArrayList<>();
+        projectionList.add("id AS _id");
+        projectionList.add("courseTitle");
+        projectionList.add("courseStartDate");
+        projectionList.add("courseEndDate");
+        String[] projection = projectionList.toArray(new String[projectionList.size()]);
         String selection = "id = ?";
         String[] selectionArgs = { String.valueOf(courseId) };
         Cursor cursor = db.query("courses", projection, selection, selectionArgs, null, null, null);
@@ -175,31 +182,29 @@ public class CourseDetails extends AppCompatActivity {
             endDateDetails.setText(endDate);
         }
 
-
-
         // fetch instructor data from database and bind it to the list view
-        String[] instructorProjection = {
-                "id AS _id",
-                "instructorName",
-                "instructorEmail",
-                "instructorNumber",
-                "courseTitle"
-        };
+        ArrayList<String> instructorProjection = new ArrayList<>();
+        instructorProjection.add("id AS _id");
+        instructorProjection.add("instructorName");
+        instructorProjection.add("instructorEmail");
+        instructorProjection.add("instructorNumber");
+        instructorProjection.add("courseTitle");
+
         String instructorSelection = "courseTitle = ?";
         String[] instructorSelectionArgs = {courseNameDetails.getText().toString()};
-        Cursor instructorCursor = db.query("instructors", instructorProjection, instructorSelection, instructorSelectionArgs, null, null, null);
+        Cursor instructorCursor = db.query("instructors", instructorProjection.toArray(new String[0]), instructorSelection, instructorSelectionArgs, null, null, null);
         instructorAdapter.swapCursor(instructorCursor);
 
         // fetch note data from database and bind it to the list view
-        String[] notesProjection = {
-                "id AS _id",
-                "noteTitle",
-                "courseTitle"
-        };
+        ArrayList<String> notesProjection = new ArrayList<>();
+        notesProjection.add("id AS _id");
+        notesProjection.add("noteTitle");
+        notesProjection.add("courseTitle");
+
         String noteSelection = "courseTitle = ?";
         String[] noteSelectionArgs = {courseNameDetails.getText().toString()};
 
-        Cursor noteCursor = db.query("notes", notesProjection, noteSelection, noteSelectionArgs, null, null, null);
+        Cursor noteCursor = db.query("notes", notesProjection.toArray(new String[0]), noteSelection, noteSelectionArgs, null, null, null);
         noteAdapter.swapCursor(noteCursor);
 
     }

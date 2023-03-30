@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="238dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/wgu_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -28,8 +37,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
         android:layout_marginTop="112dp"
+        android:layout_marginEnd="97dp"
         android:onClick="onClick"
         android:text="Terms"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -38,31 +49,37 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
-        android:layout_marginTop="184dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="97dp"
         android:onClick="onClick"
         android:text="Instructors"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/goToTerms" />
 
     <Button
         android:id="@+id/goToCourses"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
-        android:layout_marginTop="256dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="97dp"
         android:onClick="onClick"
         android:text="Courses"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/goToInstructors" />
 
     <Button
         android:id="@+id/goToAssessments"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
-        android:layout_marginTop="328dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="97dp"
         android:onClick="onClick"
         android:text="Assessments"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/goToCourses" />
 </androidx.constraintlayout.widget.ConstraintLayout>

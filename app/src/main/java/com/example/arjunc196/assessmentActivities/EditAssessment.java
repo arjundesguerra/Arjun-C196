@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.PopupMenu;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 
 import com.example.arjunc196.DatabaseHelper;
 import com.example.arjunc196.R;
-import com.example.arjunc196.coursesActivities.EditCourse;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -42,6 +40,8 @@ public class EditAssessment extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_assessment);
+
+        getSupportActionBar().setTitle("Edit Assessments");
 
         assessmentTitle = findViewById(R.id.assessmentNameDetails);
         assessmentCourse = findViewById(R.id.courseNameDetails);

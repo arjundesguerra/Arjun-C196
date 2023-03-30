@@ -44,6 +44,8 @@ public class AddCourses extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_courses);
 
+        getSupportActionBar().setTitle("Add Courses");
+
         dbHelper = new DatabaseHelper(this);
         db = dbHelper.getReadableDatabase();
 

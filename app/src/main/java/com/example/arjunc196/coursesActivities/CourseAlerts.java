@@ -33,6 +33,8 @@ public class CourseAlerts extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_alerts);
 
+        getSupportActionBar().setTitle("Add Course Alert");
+
         timeButton = findViewById(R.id.timeButton);
         startDate = findViewById(R.id.startDate);
         endDate = findViewById(R.id.endDate);

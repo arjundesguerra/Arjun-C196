@@ -17,6 +17,8 @@ import com.example.arjunc196.R;
 import com.example.arjunc196.coursesActivities.CourseAdapter;
 import com.example.arjunc196.coursesActivities.CourseDetails;
 
+import java.util.ArrayList;
+
 public class TermDetails extends AppCompatActivity {
 
     private TextView termTitleTextView;
@@ -35,6 +37,8 @@ public class TermDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_term_details);
 
+        getSupportActionBar().setTitle("Term Details");
+
         dbHelper = new DatabaseHelper(this);
         termTitleTextView = findViewById(R.id.termNameDetails);
         startDateTextView = findViewById(R.id.startDateDetails);
@@ -47,15 +51,16 @@ public class TermDetails extends AppCompatActivity {
 
         // fetch the term from the database using the term ID
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String[] projection = {
-                "id AS _id",
-                "termTitle",
-                "startDate",
-                "endDate"
-        };
+        ArrayList<String> projectionList = new ArrayList<>();
+        projectionList.add("id AS _id");
+        projectionList.add("termTitle");
+        projectionList.add("startDate");
+        projectionList.add("endDate");
+        String[] projection = projectionList.toArray(new String[0]);
         String selection = "id = ?";
         String[] selectionArgs = { String.valueOf(termId) };
         Cursor cursor = db.query("terms", projection, selection, selectionArgs, null, null, null);
+
         if (cursor.moveToFirst()) {
             // display the term details in the UI
             String termTitle = cursor.getString(cursor.getColumnIndexOrThrow("termTitle"));
@@ -112,20 +117,21 @@ public class TermDetails extends AppCompatActivity {
 
         // fetch data from database and bind it to the list view
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String[] projection = {
-                "id AS _id",
-                "courseTitle",
-                "courseStartDate",
-                "courseEndDate",
-                "termTitle",
-                "instructorName",
-                "status"
-        };
+        ArrayList<String> projectionList = new ArrayList<>();
+        projectionList.add("id AS _id");
+        projectionList.add("courseTitle");
+        projectionList.add("courseStartDate");
+        projectionList.add("courseEndDate");
+        projectionList.add("termTitle");
+        projectionList.add("instructorName");
+        projectionList.add("status");
+        String[] projection = projectionList.toArray(new String[0]);
         String selection = "termTitle = ?";
         String[] selectionArgs = { termTitleTextView.getText().toString() };
         Cursor cursor = db.query("courses", projection, selection, selectionArgs, null, null, null);
         adapter.swapCursor(cursor);
     }
+
 
 
     @Override

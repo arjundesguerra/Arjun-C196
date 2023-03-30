@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.example.arjunc196.MainActivity;
 import com.example.arjunc196.R;
 
+import java.util.ArrayList;
+
 public class InstructorAdapter extends CursorAdapter {
 
     private LayoutInflater inflater;
@@ -48,17 +50,4 @@ public class InstructorAdapter extends CursorAdapter {
         return super.swapCursor(newCursor);
     }
 
-    public Cursor getCursorForCourse(String courseTitle, SQLiteDatabase db) {
-        String[] instructorProjection = {
-                "id AS _id",
-                "instructorName",
-                "instructorEmail",
-                "instructorNumber",
-                "courseTitle"
-        };
-        String instructorSelection = "courseTitle = ?";
-        String[] instructorSelectionArgs = {courseTitle};
-        return db.query("instructors", instructorProjection, instructorSelection, instructorSelectionArgs, null, null, null);
-    }
 }
-

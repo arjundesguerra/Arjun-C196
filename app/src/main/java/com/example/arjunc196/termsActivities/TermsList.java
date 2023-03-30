@@ -15,6 +15,8 @@ import com.example.arjunc196.MainActivity;
 import com.example.arjunc196.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 public class TermsList extends AppCompatActivity {
 
     private ListView termListView;
@@ -25,6 +27,8 @@ public class TermsList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terms_list);
+
+        getSupportActionBar().setTitle("Term List");
 
         dbHelper = new DatabaseHelper(this);
         termListView = findViewById(R.id.termListView);
@@ -55,15 +59,14 @@ public class TermsList extends AppCompatActivity {
         super.onStart();
         // fetch data from database and bind it to the list view
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String[] projection = {
-                "id AS _id",
-                "termTitle",
-                "startDate",
-                "endDate"
-        };
+        ArrayList<String> projectionList = new ArrayList<>();
+        projectionList.add("id AS _id");
+        projectionList.add("termTitle");
+        projectionList.add("startDate");
+        projectionList.add("endDate");
+        String[] projection = projectionList.toArray(new String[0]);
         Cursor cursor = db.query("terms", projection, null, null, null, null, null);
         adapter.swapCursor(cursor);
-
     }
 
     @Override

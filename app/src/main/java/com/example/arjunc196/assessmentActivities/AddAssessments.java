@@ -43,6 +43,7 @@ public class AddAssessments extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_assessments);
+        getSupportActionBar().setTitle("Add Assessments");
 
         dbHelper = new DatabaseHelper(this);
         db = dbHelper.getReadableDatabase();

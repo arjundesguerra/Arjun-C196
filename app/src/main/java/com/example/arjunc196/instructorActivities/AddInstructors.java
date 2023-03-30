@@ -29,6 +29,8 @@ public class AddInstructors extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_instructors);
 
+        getSupportActionBar().setTitle("Add Instructors");
+
         editInstructorName = findViewById(R.id.editInstructorName);
         editInstructorEmail = findViewById(R.id.editInstructorEmail);
         editInstructorNumber = findViewById(R.id.editInstructorNumber);

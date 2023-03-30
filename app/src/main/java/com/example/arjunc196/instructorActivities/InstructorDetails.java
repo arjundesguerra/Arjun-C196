@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.example.arjunc196.DatabaseHelper;
 import com.example.arjunc196.R;
 
+import java.util.ArrayList;
+
 public class InstructorDetails extends AppCompatActivity {
 
     private DatabaseHelper dbHelper;
@@ -25,6 +27,8 @@ public class InstructorDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructor_details);
+
+        getSupportActionBar().setTitle("Instructor Details");
 
         dbHelper = new DatabaseHelper(this);
         nameTextView = findViewById(R.id.instructorNameDetails);
@@ -39,16 +43,17 @@ public class InstructorDetails extends AppCompatActivity {
 
         // fetch the instructor from the database
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String[] projection = {
-            "id AS _id",
-            "instructorName",
-            "instructorEmail",
-            "instructorNumber"
-        };
+        ArrayList<String> projection = new ArrayList<>();
+        projection.add("id AS _id");
+        projection.add("instructorName");
+        projection.add("instructorEmail");
+        projection.add("instructorNumber");
 
         String selection = "id = ?";
         String[] selectionArgs = { String.valueOf(instructorID) };
-        Cursor cursor = db.query("instructors", projection, selection, selectionArgs, null, null, null);
+
+        Cursor cursor = db.query("instructors", projection.toArray(new String[0]), selection, selectionArgs, null, null, null);
+
         if (cursor.moveToFirst()) {
             String instructorName = cursor.getString(cursor.getColumnIndexOrThrow("instructorName"));
             String instructorEmail = cursor.getString(cursor.getColumnIndexOrThrow("instructorEmail"));
@@ -58,6 +63,7 @@ public class InstructorDetails extends AppCompatActivity {
             emailTextView.setText(instructorEmail);
             numberTextView.setText(instructorNumber);
         }
+
         cursor.close();
 
         deleteButton.setOnClickListener(v -> {
