@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".termsActivities.TermDetails">
+
+
+    <TextView
+        android:id="@+id/detailsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="113dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="113dp"
+        android:text="Instructor Details"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/instructorNameDetails"
+        android:layout_width="278dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="253dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="254dp"
+        android:autoSizeMaxTextSize="20sp"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:text="Instructor Name"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailsText" />
+
+    <TextView
+        android:id="@+id/emailDetails"
+        android:layout_width="280dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="252dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="253dp"
+        android:autoSizeMaxTextSize="20sp"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:text="Email"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/instructorNameDetails" />
+
+    <TextView
+        android:id="@+id/numberDetails"
+        android:layout_width="282dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="251dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="252dp"
+        android:autoSizeMaxTextSize="20sp"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:text="Phone Number"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailDetails" />
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="100dp"
+        android:text="Delete Instructor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numberDetails" />
+</androidx.constraintlayout.widget.ConstraintLayout>
