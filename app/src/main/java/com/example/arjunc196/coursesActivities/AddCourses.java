@@ -137,6 +137,12 @@ public class AddCourses extends AppCompatActivity {
 
             SQLiteDatabase db = dbHelper.getWritableDatabase();
 
+            if (selectedTermTitle.equals("Select Term") || status.equals("Select Status") || courseTitle.equals("Enter a course title")
+            || courseStartDate.equals("Select Start Date") || courseEndDate.equals("Select End Date") || instructorName.equals("Select Instructor")) {
+                Toast.makeText(this, "All fields must be filled out", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             // check if the instructor is already assigned to a course
             Cursor instructorCursor = db.rawQuery("SELECT * FROM courses WHERE instructorName = ? AND status <> 'Dropped'", new String[]{instructorName});
             if (instructorCursor.getCount() > 0) {

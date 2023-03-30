@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.example.arjunc196.DatabaseHelper;
 import com.example.arjunc196.R;
@@ -83,6 +84,11 @@ public class AddNotes extends AppCompatActivity {
             String noteTitle = editNoteTitle.getText().toString();
             String noteDetails = editNoteDetails.getText().toString();
             String courseTitleString = selectCourseButton.getText().toString();
+
+            if (noteTitle.isEmpty() || noteDetails.isEmpty() || courseTitleString.equals("Select a course")) {
+                Toast.makeText(this, "All fields must be filled out", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             // insert the course information into the database row for the selected term title

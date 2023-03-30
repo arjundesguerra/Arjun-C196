@@ -79,7 +79,7 @@ public class CourseDetails extends AppCompatActivity {
         projectionList.add("courseEndDate");
 
         String selection = "id = ?";
-        String[] selectionArgs = { String.valueOf(courseId) };
+        String[] selectionArgs = {String.valueOf(courseId)};
 
         Cursor cursor = db.query("courses", projectionList.toArray(new String[projectionList.size()]), selection, selectionArgs, null, null, null);
 
@@ -128,9 +128,9 @@ public class CourseDetails extends AppCompatActivity {
         deleteButton.setOnClickListener(v -> {
             // check if there are any assessments associated with this course
             SQLiteDatabase db1 = dbHelper.getReadableDatabase();
-            String[] projection1 = { "id AS _id" };
+            String[] projection1 = {"id AS _id"};
             String selection1 = "courseTitle = ?";
-            String[] selectionArgs1 = { courseNameDetails.getText().toString() };
+            String[] selectionArgs1 = {courseNameDetails.getText().toString()};
             Cursor cursor1 = db1.query("assessments", projection1, selection1, selectionArgs1, null, null, null);
 
             if (cursor1.getCount() > 0) {
@@ -140,7 +140,7 @@ public class CourseDetails extends AppCompatActivity {
                 // delete the term from the database
                 SQLiteDatabase db2 = dbHelper.getWritableDatabase();
                 String selection2 = "id = ?";
-                String[] selectionArgs2 = { String.valueOf(courseId) };
+                String[] selectionArgs2 = {String.valueOf(courseId)};
                 db2.delete("courses", selection2, selectionArgs2);
                 Toast.makeText(CourseDetails.this, "Course deleted successfully", Toast.LENGTH_SHORT).show();
                 finish();
@@ -148,9 +148,9 @@ public class CourseDetails extends AppCompatActivity {
             cursor1.close();
         });
 
-            addNotesButton.setOnClickListener(view -> {
-                Intent goToNotes = new Intent(CourseDetails.this, AddNotes.class);
-                startActivity(goToNotes);
+        addNotesButton.setOnClickListener(view -> {
+            Intent goToNotes = new Intent(CourseDetails.this, AddNotes.class);
+            startActivity(goToNotes);
         });
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -183,7 +183,7 @@ public class CourseDetails extends AppCompatActivity {
         projectionList.add("courseEndDate");
         String[] projection = projectionList.toArray(new String[projectionList.size()]);
         String selection = "id = ?";
-        String[] selectionArgs = { String.valueOf(courseId) };
+        String[] selectionArgs = {String.valueOf(courseId)};
         Cursor cursor = db.query("courses", projection, selection, selectionArgs, null, null, null);
         if (cursor.moveToFirst()) {
             @SuppressLint("Range") String courseTitle = cursor.getString(cursor.getColumnIndex("courseTitle"));
@@ -238,11 +238,4 @@ public class CourseDetails extends AppCompatActivity {
         super.onDestroy();
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, CoursesList.class);
-        startActivity(intent);
-        finish();
-    }
 }
-

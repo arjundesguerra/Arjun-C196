@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.example.arjunc196.DatabaseHelper;
 import com.example.arjunc196.R;
@@ -119,6 +120,12 @@ public class AddAssessments extends AppCompatActivity {
             String typeText = typeButton.getText().toString();
             String startDate = startDateButton.getText().toString();
             String endDate = endDateButton.getText().toString();
+
+            if (assessmentText.equals("Enter an assessment title") || courseText.equals("Select Course") || typeText.equals("Select Type")
+                    || startDate.equals("Select Start Date") || endDate.equals("Select End Date")) {
+                Toast.makeText(this, "All fields must be filled out", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             // insert the assessment information into the database row for the selected term title

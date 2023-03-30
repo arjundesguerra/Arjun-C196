@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.arjunc196.DatabaseHelper;
 import com.example.arjunc196.R;
@@ -81,21 +82,24 @@ public class AddInstructors extends AppCompatActivity {
             String email = editInstructorEmail.getText().toString();
             String number = editInstructorNumber.getText().toString();
 
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            if (name.equals("Enter instructor name") || email.equals("Enter instructor email") || number.equals("Enter instructor phone number")) {
+                Toast.makeText(AddInstructors.this, "All fields must be filled out", Toast.LENGTH_SHORT).show();
+            } else {
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-            ContentValues contentValues = new ContentValues();
-            contentValues.put("instructorName", name);
-            contentValues.put("instructorEmail", email);
-            contentValues.put("instructorNumber", number);
-            db.insert("instructors", null, contentValues);
+                ContentValues contentValues = new ContentValues();
+                contentValues.put("instructorName", name);
+                contentValues.put("instructorEmail", email);
+                contentValues.put("instructorNumber", number);
+                db.insert("instructors", null, contentValues);
 
-            // open the instructor list activity
-            Intent intent = new Intent(AddInstructors.this, InstructorList.class);
-            startActivity(intent);
+                // open the instructor list activity
+                Intent intent = new Intent(AddInstructors.this, InstructorList.class);
+                startActivity(intent);
+            }
 
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         });
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 

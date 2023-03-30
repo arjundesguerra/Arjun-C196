@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.arjunc196.R;
 import com.example.arjunc196.DatabaseHelper;
@@ -83,6 +84,12 @@ public class AddTerms extends AppCompatActivity {
             String startDate = dateFormat.format(startCalendar.getTime());
             String endDate = dateFormat.format(endCalendar.getTime());
 
+            // check if the entered data is equal to the default values
+            if (termTitle.equals("Enter a term title") || startDate.equals("Select Start Date") || endDate.equals("Select End Date")) {
+                Toast.makeText(this, "All fields must be filled out", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             // insert the data into the database
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
@@ -95,6 +102,7 @@ public class AddTerms extends AppCompatActivity {
             Intent intent = new Intent(AddTerms.this, TermsList.class);
             startActivity(intent);
         });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
