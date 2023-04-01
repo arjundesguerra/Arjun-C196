@@ -106,7 +106,6 @@
         android:layout_width="391dp"
         android:layout_height="110dp"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
         android:scrollbars="none"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notesText" />
@@ -119,7 +118,7 @@
         android:layout_marginTop="4dp"
         android:gravity="center"
         android:text="Notes"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/instructorListView" />
@@ -129,7 +128,6 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="148dp"
-        android:layout_marginTop="4dp"
         android:text="Add Note"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notesListView" />
